@@ -266,9 +266,56 @@
             color: #b0c4de;
             margin-top: 5px;
         }
+        /* ===== 顶部官网栏 ===== */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            background: rgba(10, 14, 39, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .top-bar-inner {
+            max-width: 1400px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .top-logo {
+            height: 36px;
+            margin-right: 12px;
+        }
+        
+        .top-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffd700;
+            letter-spacing: 1px;
+        }
+        
+        /* 给原 header 顶出空间，避免被挡住 */
+        .header {
+            margin-top: 64px;
+        }
+
     </style>
 </head>
 <body>
+    <!-- 顶部官网栏 -->
+    <div class="top-bar">
+        <div class="top-bar-inner">
+            <img src="assets/logo.png" alt="官网 Logo" class="top-logo">
+            <span class="top-title">加密科技传媒有限公司</span>
+        </div>
+    </div>
+
     <div class="header">
         <h1>🚀 Web3 全方位服务平台</h1>
         <p>从新闻营销到技术开发 | 从上币服务到市值管理 | 一站式加密货币解决方案</p>
