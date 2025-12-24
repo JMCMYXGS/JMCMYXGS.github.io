@@ -947,7 +947,17 @@
                     <span style="color:#b0c4de;">|</span>
                 
                     <!-- 服务条款 -->
-                    <a href="/terms.html"
+                    <!-- <a href="/terms.html"
+                       target="_blank"
+                       style="display:inline-flex; align-items:center; gap:6px; color:#b0c4de; text-decoration:none; font-weight:500;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#b0c4de" aria-hidden="true">
+                            <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5z"/>
+                        </svg>
+                        <span data-zh="服务条款" data-en="Terms of Service">服务条款</span>
+                    </a> -->
+                    <!-- 服务条款 -->
+                    <a href="/terms.html" 
+                       id="termsLink"
                        target="_blank"
                        style="display:inline-flex; align-items:center; gap:6px; color:#b0c4de; text-decoration:none; font-weight:500;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="#b0c4de" aria-hidden="true">
@@ -984,7 +994,10 @@
             
             // 更新页面语言属性
             document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
-            
+            const termsLink = document.getElementById('termsLink');
+            if (termsLink) {
+                termsLink.href = `/terms.html?lang=${currentLang}`;
+            }
             // 保存语言偏好到 localStorage
             localStorage.setItem('preferredLang', currentLang);
         }
