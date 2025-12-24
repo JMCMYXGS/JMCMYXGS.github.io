@@ -111,6 +111,41 @@
             border-radius: 5px;
         }
 
+        .lang-switcher-terms {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .lang-switcher-terms:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .lang-icon {
+            width: 20px;
+            height: 20px;
+            fill: #ffd700;
+        }
+
+        .lang-text {
+            color: #ffd700;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 30px 20px;
@@ -123,167 +158,236 @@
             h2 {
                 font-size: 1.3em;
             }
+
+            .lang-switcher-terms {
+                top: 15px;
+                right: 15px;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- 语言切换按钮 -->
+    <div class="lang-switcher-terms" onclick="toggleLanguage()">
+        <svg class="lang-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+        </svg>
+        <span class="lang-text" id="langText">EN</span>
+    </div>
+
     <div class="container">
-        <a href="index.html" class="back-link">← 返回首页</a>
+        <a href="index.html" class="back-link" data-zh="← 返回首页" data-en="← Back to Home">← 返回首页</a>
         
-        <h1>服务条款</h1>
-        <p class="subtitle">Terms of Service | 最后更新日期：2025 年</p>
+        <h1 data-zh="服务条款" data-en="Terms of Service">服务条款</h1>
+        <p class="subtitle" data-zh="最后更新日期：2025 年" data-en="Last Updated: 2025">最后更新日期：2025 年</p>
 
-        <p>欢迎访问并使用网站：<br>
-        <a href="https://jmcmyxgs.github.io" style="color: #ffd700;">https://jmcmyxgs.github.io</a></p>
+        <p data-zh="欢迎访问并使用网站：" data-en="Welcome to our website:">欢迎访问并使用网站：</p>
+        <p><a href="https://jmcmyxgs.github.io" style="color: #ffd700;">https://jmcmyxgs.github.io</a></p>
 
-        <p>（以下简称"本网站"或"我们"）。</p>
+        <p data-zh="（以下简称"本网站"或"我们"）。" data-en='(hereinafter referred to as "the Website" or "We").'>（以下简称"本网站"或"我们"）。</p>
 
         <div class="highlight-box">
-            <p><strong>重要提示：</strong>在您访问、浏览或购买本网站所提供的任何服务前，请您务必仔细阅读并理解本《服务条款》（以下简称"条款"）。一旦您访问、使用本网站或购买我们的任何服务，即表示您已阅读、理解并同意受本条款的约束。</p>
+            <p data-zh="<strong>重要提示：</strong>在您访问、浏览或购买本网站所提供的任何服务前，请您务必仔细阅读并理解本《服务条款》（以下简称"条款"）。一旦您访问、使用本网站或购买我们的任何服务，即表示您已阅读、理解并同意受本条款的约束。" 
+               data-en='<strong>Important Notice:</strong> Before accessing, browsing or purchasing any services provided by this Website, please read and understand these Terms of Service (hereinafter referred to as "Terms") carefully. By accessing, using this Website or purchasing any of our services, you acknowledge that you have read, understood and agreed to be bound by these Terms.'>
+                <strong>重要提示：</strong>在您访问、浏览或购买本网站所提供的任何服务前，请您务必仔细阅读并理解本《服务条款》（以下简称"条款"）。一旦您访问、使用本网站或购买我们的任何服务，即表示您已阅读、理解并同意受本条款的约束。
+            </p>
         </div>
 
-        <h2>一、服务内容</h2>
-        <p>本网站提供的服务包括但不限于：</p>
+        <h2 data-zh="一、服务内容" data-en="1. Service Content">一、服务内容</h2>
+        <p data-zh="本网站提供的服务包括但不限于：" data-en="Services provided by this Website include but are not limited to:">本网站提供的服务包括但不限于：</p>
         <ul>
-            <li>Web3 / 区块链相关咨询与技术建议</li>
-            <li>项目策划、产品设计、运营支持与市场推广建议</li>
-            <li>社群建设、品牌包装、内容策划</li>
-            <li>项目开发服务（包括但不限于前端、后端、合约、工具或相关技术支持）</li>
-            <li>加密货币及数字资产相关的技术或信息支持服务</li>
+            <li data-zh="Web3 / 区块链相关咨询与技术建议" data-en="Web3 / blockchain related consulting and technical advice">Web3 / 区块链相关咨询与技术建议</li>
+            <li data-zh="项目策划、产品设计、运营支持与市场推广建议" data-en="Project planning, product design, operational support and marketing recommendations">项目策划、产品设计、运营支持与市场推广建议</li>
+            <li data-zh="社群建设、品牌包装、内容策划" data-en="Community building, brand packaging, content planning">社群建设、品牌包装、内容策划</li>
+            <li data-zh="项目开发服务（包括但不限于前端、后端、合约、工具或相关技术支持）" data-en="Project development services (including but not limited to frontend, backend, smart contracts, tools or related technical support)">项目开发服务（包括但不限于前端、后端、合约、工具或相关技术支持）</li>
+            <li data-zh="加密货币及数字资产相关的技术或信息支持服务" data-en="Technical or informational support services related to cryptocurrencies and digital assets">加密货币及数字资产相关的技术或信息支持服务</li>
         </ul>
-        <p><strong>所有服务均属于信息服务、咨询服务或技术支持服务，不构成任何投资、理财或收益保证。</strong></p>
+        <p data-zh="<strong>所有服务均属于信息服务、咨询服务或技术支持服务，不构成任何投资、理财或收益保证。</strong>" 
+           data-en="<strong>All services are information services, consulting services or technical support services, and do not constitute any investment, financial management or profit guarantee.</strong>">
+            <strong>所有服务均属于信息服务、咨询服务或技术支持服务，不构成任何投资、理财或收益保证。</strong>
+        </p>
 
-        <h2>二、项目开发与技术服务特别说明</h2>
+        <h2 data-zh="二、项目开发与技术服务特别说明" data-en="2. Special Notes on Project Development and Technical Services">二、项目开发与技术服务特别说明</h2>
         <ul>
-            <li>项目开发服务系按照双方约定的功能范围、技术方案或交付内容进行实施；</li>
-            <li>我们的义务为提供约定范围内的技术实现与交付支持，而非保证项目最终上线、运行结果、商业成功、用户规模、融资结果或任何经济收益；</li>
-            <li>项目是否成功、是否被市场接受、是否产生收益，受多种不可控因素影响，与技术交付本身无直接必然关系。</li>
-        </ul>
-
-        <h2>三、服务使用资格</h2>
-        <p>您确认并保证：</p>
-        <ul>
-            <li>您已年满 18 周岁，具备完全民事行为能力；</li>
-            <li>您所在的司法辖区允许您访问本网站并使用相关服务；</li>
-            <li>您使用本网站及相关服务不违反任何适用的法律法规或监管要求。</li>
+            <li data-zh="项目开发服务系按照双方约定的功能范围、技术方案或交付内容进行实施；" data-en="Project development services are implemented according to the functional scope, technical solutions or deliverables agreed upon by both parties;">项目开发服务系按照双方约定的功能范围、技术方案或交付内容进行实施；</li>
+            <li data-zh="我们的义务为提供约定范围内的技术实现与交付支持，而非保证项目最终上线、运行结果、商业成功、用户规模、融资结果或任何经济收益；" data-en="Our obligation is to provide technical implementation and delivery support within the agreed scope, not to guarantee the final launch, operational results, commercial success, user scale, financing results or any economic benefits of the project;">我们的义务为提供约定范围内的技术实现与交付支持，而非保证项目最终上线、运行结果、商业成功、用户规模、融资结果或任何经济收益；</li>
+            <li data-zh="项目是否成功、是否被市场接受、是否产生收益，受多种不可控因素影响，与技术交付本身无直接必然关系。" data-en="Whether the project is successful, accepted by the market, or generates revenue is affected by many uncontrollable factors and is not directly related to the technical delivery itself.">项目是否成功、是否被市场接受、是否产生收益，受多种不可控因素影响，与技术交付本身无直接必然关系。</li>
         </ul>
 
-        <h2>四、服务地区与合规限制</h2>
+        <h2 data-zh="三、服务使用资格" data-en="3. Service Eligibility">三、服务使用资格</h2>
+        <p data-zh="您确认并保证：" data-en="You confirm and warrant that:">您确认并保证：</p>
+        <ul>
+            <li data-zh="您已年满 18 周岁，具备完全民事行为能力；" data-en="You are at least 18 years old and have full legal capacity;">您已年满 18 周岁，具备完全民事行为能力；</li>
+            <li data-zh="您所在的司法辖区允许您访问本网站并使用相关服务；" data-en="Your jurisdiction allows you to access this Website and use the related services;">您所在的司法辖区允许您访问本网站并使用相关服务；</li>
+            <li data-zh="您使用本网站及相关服务不违反任何适用的法律法规或监管要求。" data-en="Your use of this Website and related services does not violate any applicable laws, regulations or regulatory requirements.">您使用本网站及相关服务不违反任何适用的法律法规或监管要求。</li>
+        </ul>
+
+        <h2 data-zh="四、服务地区与合规限制" data-en="4. Service Regions and Compliance Restrictions">四、服务地区与合规限制</h2>
         <div class="warning">
-            <p><strong>本网站及所提供的任何服务 不面向法律、法规或监管政策禁止或限制加密货币、区块链或相关技术活动的国家或地区的用户；</strong></p>
+            <p data-zh="<strong>本网站及所提供的任何服务 不面向法律、法规或监管政策禁止或限制加密货币、区块链或相关技术活动的国家或地区的用户；</strong>" 
+               data-en="<strong>This Website and any services provided are NOT available to users in countries or regions where laws, regulations or regulatory policies prohibit or restrict cryptocurrency, blockchain or related technology activities;</strong>">
+                <strong>本网站及所提供的任何服务 不面向法律、法规或监管政策禁止或限制加密货币、区块链或相关技术活动的国家或地区的用户；</strong>
+            </p>
         </div>
         <ul>
-            <li>用户有责任自行了解并确认其所在国家或地区的相关法律法规是否允许其访问本网站及使用相关服务；</li>
-            <li>如因用户所在国家或地区的法律、监管政策、制裁要求或合规限制，导致用户无法使用本网站服务、服务被中断或产生任何损失的，相关责任由用户自行承担，本网站不承担任何责任；</li>
-            <li>我们保留在不另行通知的情况下，限制、拒绝或终止来自特定国家或地区访问或使用本网站服务的权利。</li>
+            <li data-zh="用户有责任自行了解并确认其所在国家或地区的相关法律法规是否允许其访问本网站及使用相关服务；" data-en="Users are responsible for understanding and confirming whether the relevant laws and regulations in their country or region allow them to access this Website and use the related services;">用户有责任自行了解并确认其所在国家或地区的相关法律法规是否允许其访问本网站及使用相关服务；</li>
+            <li data-zh="如因用户所在国家或地区的法律、监管政策、制裁要求或合规限制，导致用户无法使用本网站服务、服务被中断或产生任何损失的，相关责任由用户自行承担，本网站不承担任何责任；" data-en="If users are unable to use the Website services, services are interrupted or any losses occur due to laws, regulatory policies, sanction requirements or compliance restrictions in the user's country or region, the relevant liabilities shall be borne by the users themselves, and the Website shall not bear any responsibility;">如因用户所在国家或地区的法律、监管政策、制裁要求或合规限制，导致用户无法使用本网站服务、服务被中断或产生任何损失的，相关责任由用户自行承担，本网站不承担任何责任；</li>
+            <li data-zh="我们保留在不另行通知的情况下，限制、拒绝或终止来自特定国家或地区访问或使用本网站服务的权利。" data-en="We reserve the right to restrict, refuse or terminate access to or use of the Website services from specific countries or regions without further notice.">我们保留在不另行通知的情况下，限制、拒绝或终止来自特定国家或地区访问或使用本网站服务的权利。</li>
         </ul>
 
-        <h2>五、费用与支付</h2>
+        <h2 data-zh="五、费用与支付" data-en="5. Fees and Payment">五、费用与支付</h2>
         <ul>
-            <li>本网站的部分服务为付费服务，具体价格、服务内容、交付方式以网站页面展示或双方书面/电子确认内容为准；</li>
-            <li>所有费用可通过法定货币或双方认可的数字资产形式支付；</li>
-            <li>在完成支付前，您应自行确认服务内容、价格及交付方式。</li>
+            <li data-zh="本网站的部分服务为付费服务，具体价格、服务内容、交付方式以网站页面展示或双方书面/电子确认内容为准；" data-en="Some services on this Website are paid services. The specific prices, service content and delivery methods are subject to the website page display or written/electronic confirmation by both parties;">本网站的部分服务为付费服务，具体价格、服务内容、交付方式以网站页面展示或双方书面/电子确认内容为准；</li>
+            <li data-zh="所有费用可通过法定货币或双方认可的数字资产形式支付；" data-en="All fees can be paid in fiat currency or digital assets recognized by both parties;">所有费用可通过法定货币或双方认可的数字资产形式支付；</li>
+            <li data-zh="在完成支付前，您应自行确认服务内容、价格及交付方式。" data-en="Before completing payment, you should confirm the service content, price and delivery method by yourself.">在完成支付前，您应自行确认服务内容、价格及交付方式。</li>
         </ul>
 
-        <h2>六、退款政策（非常重要）</h2>
+        <h2 data-zh="六、退款政策（非常重要）" data-en="6. Refund Policy (Very Important)">六、退款政策（非常重要）</h2>
         
-        <h3>1️⃣ 一般原则</h3>
+        <h3 data-zh="1️⃣ 一般原则" data-en="1️⃣ General Principle">1️⃣ 一般原则</h3>
         <div class="highlight-box">
-            <p>鉴于本网站所提供的服务多为 <strong>定制化咨询、技术开发或数字化服务</strong>，一经开始执行，<strong>原则上不支持无理由退款</strong>。</p>
+            <p data-zh="鉴于本网站所提供的服务多为 <strong>定制化咨询、技术开发或数字化服务</strong>，一经开始执行，<strong>原则上不支持无理由退款</strong>。" 
+               data-en="Given that most services provided by this Website are <strong>customized consulting, technical development or digital services</strong>, once execution begins, <strong>refunds without reason are not supported in principle</strong>.">
+                鉴于本网站所提供的服务多为 <strong>定制化咨询、技术开发或数字化服务</strong>，一经开始执行，<strong>原则上不支持无理由退款</strong>。
+            </p>
         </div>
 
-        <h3>2️⃣ 可退款情形</h3>
-        <p>在以下情况下，我们将根据实际情况协商处理退款：</p>
+        <h3 data-zh="2️⃣ 可退款情形" data-en="2️⃣ Refundable Situations">2️⃣ 可退款情形</h3>
+        <p data-zh="在以下情况下，我们将根据实际情况协商处理退款：" data-en="In the following situations, we will negotiate refunds based on actual circumstances:">在以下情况下，我们将根据实际情况协商处理退款：</p>
         <ul>
-            <li>在约定时间内 <strong>未提供任何实质性服务</strong>；</li>
-            <li>因我们的原因导致服务 <strong>无法继续履行</strong>；</li>
-            <li>双方以书面或可追溯方式明确同意退款。</li>
+            <li data-zh="在约定时间内 <strong>未提供任何实质性服务</strong>；" data-en="<strong>No substantial services</strong> are provided within the agreed time;">在约定时间内 <strong>未提供任何实质性服务</strong>；</li>
+            <li data-zh="因我们的原因导致服务 <strong>无法继续履行</strong>；" data-en="Services <strong>cannot continue to be performed</strong> due to our reasons;">因我们的原因导致服务 <strong>无法继续履行</strong>；</li>
+            <li data-zh="双方以书面或可追溯方式明确同意退款。" data-en="Both parties explicitly agree to a refund in writing or in a traceable manner.">双方以书面或可追溯方式明确同意退款。</li>
         </ul>
-        <p>退款金额将依据 <strong>已发生的服务成本、已完成的服务阶段或交付比例</strong> 进行合理扣除。</p>
+        <p data-zh="退款金额将依据 <strong>已发生的服务成本、已完成的服务阶段或交付比例</strong> 进行合理扣除。" 
+           data-en="Refund amounts will be reasonably deducted based on <strong>incurred service costs, completed service stages or delivery ratios</strong>.">
+            退款金额将依据 <strong>已发生的服务成本、已完成的服务阶段或交付比例</strong> 进行合理扣除。
+        </p>
 
-        <h3>3️⃣ 不可退款情形（包括但不限于）</h3>
+        <h3 data-zh="3️⃣ 不可退款情形（包括但不限于）" data-en="3️⃣ Non-refundable Situations (including but not limited to)">3️⃣ 不可退款情形（包括但不限于）</h3>
         <ul>
-            <li>服务已开始执行或已完成部分交付；</li>
-            <li>因市场变化、项目风险、用户个人决策等原因提出退款；</li>
-            <li>因第三方平台、链上环境、协议规则或市场行情变化导致预期未达成；</li>
-            <li>用户违反本条款或相关法律法规。</li>
-        </ul>
-
-        <h2>七、售后与支持</h2>
-        <ul>
-            <li>我们将依据双方约定内容提供合理的售后支持；</li>
-            <li>售后支持仅限于约定范围内的服务内容，不包含额外未约定的需求或功能；</li>
-            <li>因不可抗力或第三方原因（包括但不限于区块链网络、云服务、平台规则变更等）导致的服务中断或延迟，不视为违约。</li>
+            <li data-zh="服务已开始执行或已完成部分交付；" data-en="Services have begun execution or partial delivery has been completed;">服务已开始执行或已完成部分交付；</li>
+            <li data-zh="因市场变化、项目风险、用户个人决策等原因提出退款；" data-en="Refund requests due to market changes, project risks, user personal decisions, etc.;">因市场变化、项目风险、用户个人决策等原因提出退款；</li>
+            <li data-zh="因第三方平台、链上环境、协议规则或市场行情变化导致预期未达成；" data-en="Expectations not met due to third-party platforms, on-chain environments, protocol rule changes or market conditions;">因第三方平台、链上环境、协议规则或市场行情变化导致预期未达成；</li>
+            <li data-zh="用户违反本条款或相关法律法规。" data-en="Users violate these Terms or relevant laws and regulations.">用户违反本条款或相关法律法规。</li>
         </ul>
 
-        <h2>八、第三方依赖与不可控因素声明</h2>
-        <p>您理解并同意：</p>
+        <h2 data-zh="七、售后与支持" data-en="7. After-sales and Support">七、售后与支持</h2>
         <ul>
-            <li>项目开发或技术服务可能依赖第三方协议、区块链网络、云服务、API、开源组件或外部平台；</li>
-            <li>上述第三方的稳定性、安全性、持续可用性及规则变化不由我们控制；</li>
-            <li>因第三方原因导致的服务异常、延迟或损失，我们不承担责任。</li>
+            <li data-zh="我们将依据双方约定内容提供合理的售后支持；" data-en="We will provide reasonable after-sales support based on the content agreed by both parties;">我们将依据双方约定内容提供合理的售后支持；</li>
+            <li data-zh="售后支持仅限于约定范围内的服务内容，不包含额外未约定的需求或功能；" data-en="After-sales support is limited to service content within the agreed scope and does not include additional unagreed requirements or functions;">售后支持仅限于约定范围内的服务内容，不包含额外未约定的需求或功能；</li>
+            <li data-zh="因不可抗力或第三方原因（包括但不限于区块链网络、云服务、平台规则变更等）导致的服务中断或延迟，不视为违约。" data-en="Service interruptions or delays due to force majeure or third-party reasons (including but not limited to blockchain networks, cloud services, platform rule changes, etc.) are not considered breaches of contract.">因不可抗力或第三方原因（包括但不限于区块链网络、云服务、平台规则变更等）导致的服务中断或延迟，不视为违约。</li>
         </ul>
 
-        <h2>九、风险提示与免责声明（重点）</h2>
+        <h2 data-zh="八、第三方依赖与不可控因素声明" data-en="8. Third-party Dependencies and Uncontrollable Factors Disclaimer">八、第三方依赖与不可控因素声明</h2>
+        <p data-zh="您理解并同意：" data-en="You understand and agree that:">您理解并同意：</p>
+        <ul>
+            <li data-zh="项目开发或技术服务可能依赖第三方协议、区块链网络、云服务、API、开源组件或外部平台；" data-en="Project development or technical services may rely on third-party protocols, blockchain networks, cloud services, APIs, open-source components or external platforms;">项目开发或技术服务可能依赖第三方协议、区块链网络、云服务、API、开源组件或外部平台；</li>
+            <li data-zh="上述第三方的稳定性、安全性、持续可用性及规则变化不由我们控制；" data-en="The stability, security, continuous availability and rule changes of the above third parties are not controlled by us;">上述第三方的稳定性、安全性、持续可用性及规则变化不由我们控制；</li>
+            <li data-zh="因第三方原因导致的服务异常、延迟或损失，我们不承担责任。" data-en="We are not responsible for service anomalies, delays or losses caused by third-party reasons.">因第三方原因导致的服务异常、延迟或损失，我们不承担责任。</li>
+        </ul>
+
+        <h2 data-zh="九、风险提示与免责声明（重点）" data-en="9. Risk Warning and Disclaimer (Important)">九、风险提示与免责声明（重点）</h2>
         <div class="warning">
-            <p><strong>您明确知悉并同意：</strong></p>
+            <p data-zh="<strong>您明确知悉并同意：</strong>" data-en="<strong>You expressly acknowledge and agree that:</strong>"><strong>您明确知悉并同意：</strong></p>
             <ul>
-                <li>区块链、加密资产及 Web3 行业具有高度风险性和不确定性；</li>
-                <li>本网站提供的所有信息、建议、策略 <strong>不构成投资建议、收益承诺或法律意见</strong>；</li>
-                <li>您基于本网站内容或服务作出的任何决策，其风险由您自行承担；</li>
+                <li data-zh="区块链、加密资产及 Web3 行业具有高度风险性和不确定性；" data-en="Blockchain, crypto assets and the Web3 industry are highly risky and uncertain;">区块链、加密资产及 Web3 行业具有高度风险性和不确定性；</li>
+                <li data-zh="本网站提供的所有信息、建议、策略 <strong>不构成投资建议、收益承诺或法律意见</strong>；" data-en="All information, recommendations and strategies provided by this Website <strong>do not constitute investment advice, profit promises or legal opinions</strong>;">本网站提供的所有信息、建议、策略 <strong>不构成投资建议、收益承诺或法律意见</strong>；</li>
+                <li data-zh="您基于本网站内容或服务作出的任何决策，其风险由您自行承担；" data-en="You bear the risks of any decisions made based on the content or services of this Website;">您基于本网站内容或服务作出的任何决策，其风险由您自行承担；</li>
             </ul>
         </div>
         
-        <p><strong>我们不对以下情况承担责任：</strong></p>
+        <p data-zh="<strong>我们不对以下情况承担责任：</strong>" data-en="<strong>We are not responsible for the following:</strong>"><strong>我们不对以下情况承担责任：</strong></p>
         <ul>
-            <li>市场波动、价格变化、项目失败；</li>
-            <li>第三方协议、平台或合约漏洞；</li>
-            <li>政策、法律或监管环境变化；</li>
-            <li>不可抗力事件。</li>
+            <li data-zh="市场波动、价格变化、项目失败；" data-en="Market fluctuations, price changes, project failures;">市场波动、价格变化、项目失败；</li>
+            <li data-zh="第三方协议、平台或合约漏洞；" data-en="Third-party protocol, platform or contract vulnerabilities;">第三方协议、平台或合约漏洞；</li>
+            <li data-zh="政策、法律或监管环境变化；" data-en="Policy, legal or regulatory environment changes;">政策、法律或监管环境变化；</li>
+            <li data-zh="不可抗力事件。" data-en="Force majeure events.">不可抗力事件。</li>
         </ul>
 
-        <h2>十、责任限制</h2>
-        <p>在适用法律允许的最大范围内：</p>
+        <h2 data-zh="十、责任限制" data-en="10. Limitation of Liability">十、责任限制</h2>
+        <p data-zh="在适用法律允许的最大范围内：" data-en="To the maximum extent permitted by applicable law:">在适用法律允许的最大范围内：</p>
         <ul>
-            <li>本网站及其运营方不对任何间接损失、预期收益损失或数据损失承担责任；</li>
-            <li>我们对单一服务的累计责任金额 <strong>不超过用户为该服务实际支付的费用总额</strong>。</li>
+            <li data-zh="本网站及其运营方不对任何间接损失、预期收益损失或数据损失承担责任；" data-en="This Website and its operators are not responsible for any indirect losses, expected revenue losses or data losses;">本网站及其运营方不对任何间接损失、预期收益损失或数据损失承担责任；</li>
+            <li data-zh="我们对单一服务的累计责任金额 <strong>不超过用户为该服务实际支付的费用总额</strong>。" data-en="Our cumulative liability for a single service <strong>shall not exceed the total amount actually paid by the user for that service</strong>.">我们对单一服务的累计责任金额 <strong>不超过用户为该服务实际支付的费用总额</strong>。</li>
         </ul>
 
-        <h2>十一、用户行为规范</h2>
-        <p>您不得利用本网站从事以下行为：</p>
+        <h2 data-zh="十一、用户行为规范" data-en="11. User Conduct Standards">十一、用户行为规范</h2>
+        <p data-zh="您不得利用本网站从事以下行为：" data-en="You shall not use this Website to engage in the following:">您不得利用本网站从事以下行为：</p>
         <ul>
-            <li>违法、欺诈、洗钱或其他非法活动；</li>
-            <li>侵犯他人合法权益；</li>
-            <li>散布虚假信息、恶意攻击或破坏系统安全；</li>
-            <li>违反任何适用法律法规或行业规范。</li>
+            <li data-zh="违法、欺诈、洗钱或其他非法活动；" data-en="Illegal activities, fraud, money laundering or other unlawful activities;">违法、欺诈、洗钱或其他非法活动；</li>
+            <li data-zh="侵犯他人合法权益；" data-en="Infringing on the legitimate rights and interests of others;">侵犯他人合法权益；</li>
+            <li data-zh="散布虚假信息、恶意攻击或破坏系统安全；" data-en="Spreading false information, malicious attacks or undermining system security;">散布虚假信息、恶意攻击或破坏系统安全；</li>
+            <li data-zh="违反任何适用法律法规或行业规范。" data-en="Violating any applicable laws, regulations or industry standards.">违反任何适用法律法规或行业规范。</li>
         </ul>
-        <p>我们有权在不另行通知的情况下暂停或终止违规用户的服务。</p>
+        <p data-zh="我们有权在不另行通知的情况下暂停或终止违规用户的服务。" data-en="We have the right to suspend or terminate services for users who violate the rules without further notice.">我们有权在不另行通知的情况下暂停或终止违规用户的服务。</p>
 
-        <h2>十二、知识产权</h2>
-        <p>本网站所包含的所有内容，包括但不限于：</p>
+        <h2 data-zh="十二、知识产权" data-en="12. Intellectual Property">十二、知识产权</h2>
+        <p data-zh="本网站所包含的所有内容，包括但不限于：" data-en="All content contained on this Website, including but not limited to:">本网站所包含的所有内容，包括但不限于：</p>
         <ul>
-            <li>文本、图像、设计、标识、代码、文档</li>
+            <li data-zh="文本、图像、设计、标识、代码、文档" data-en="Text, images, designs, logos, code, documentation">文本、图像、设计、标识、代码、文档</li>
         </ul>
-        <p>均受相关法律保护，未经授权不得复制、传播或用于任何商业用途。</p>
+        <p data-zh="均受相关法律保护，未经授权不得复制、传播或用于任何商业用途。" data-en="are protected by relevant laws and may not be copied, distributed or used for any commercial purposes without authorization.">均受相关法律保护，未经授权不得复制、传播或用于任何商业用途。</p>
 
-        <h2>十三、条款变更</h2>
+        <h2 data-zh="十三、条款变更" data-en="13. Changes to Terms">十三、条款变更</h2>
         <ul>
-            <li>我们有权根据业务或法律变化随时更新本条款。</li>
-            <li>更新后的条款一经发布即生效，您继续使用本网站或相关服务即视为接受更新内容。</li>
-        </ul>
-
-        <h2>十四、适用法律与争议解决</h2>
-        <ul>
-            <li>本条款的订立、执行与解释适用 <strong>相关国际通行法律原则或运营主体所在地法律</strong>。</li>
-            <li>因本条款或服务产生的任何争议，双方应首先友好协商解决；协商不成的，提交有管辖权的法院或仲裁机构处理。</li>
+            <li data-zh="我们有权根据业务或法律变化随时更新本条款。" data-en="We have the right to update these Terms at any time based on business or legal changes.">我们有权根据业务或法律变化随时更新本条款。</li>
+            <li data-zh="更新后的条款一经发布即生效，您继续使用本网站或相关服务即视为接受更新内容。" data-en="Updated Terms take effect upon publication, and your continued use of this Website or related services constitutes acceptance of the updated content.">更新后的条款一经发布即生效，您继续使用本网站或相关服务即视为接受更新内容。</li>
         </ul>
 
-        <h2>十五、联系我们</h2>
-        <p>如您对本条款或服务有任何疑问，请通过本网站所提供的联系方式与我们取得联系。</p>
+        <h2 data-zh="十四、适用法律与争议解决" data-en="14. Applicable Law and Dispute Resolution">十四、适用法律与争议解决</h2>
+        <ul>
+            <li data-zh="本条款的订立、执行与解释适用 <strong>相关国际通行法律原则或运营主体所在地法律</strong>。" data-en="The conclusion, implementation and interpretation of these Terms shall be governed by <strong>relevant international legal principles or the laws of the jurisdiction where the operating entity is located</strong>.">本条款的订立、执行与解释适用 <strong>相关国际通行法律原则或运营主体所在地法律</strong>。</li>
+            <li data-zh="因本条款或服务产生的任何争议，双方应首先友好协商解决；协商不成的，提交有管辖权的法院或仲裁机构处理。" data-en="Any disputes arising from these Terms or services shall first be resolved through friendly negotiation between both parties; if negotiation fails, they shall be submitted to a court or arbitration institution with jurisdiction.">因本条款或服务产生的任何争议，双方应首先友好协商解决；协商不成的，提交有管辖权的法院或仲裁机构处理。</li>
+        </ul>
+
+        <h2 data-zh="十五、联系我们" data-en="15. Contact Us">十五、联系我们</h2>
+        <p data-zh="如您对本条款或服务有任何疑问，请通过本网站所提供的联系方式与我们取得联系。" data-en="If you have any questions about these Terms or services, please contact us through the contact information provided on this Website.">如您对本条款或服务有任何疑问，请通过本网站所提供的联系方式与我们取得联系。</p>
 
         <div style="text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-            <a href="index.html" class="back-link" style="font-size: 1.1em;">← 返回首页</a>
+            <a href="index.html" class="back-link" style="font-size: 1.1em;" data-zh="← 返回首页" data-en="← Back to Home">← 返回首页</a>
         </div>
     </div>
+
+    <script>
+        // 语言切换功能
+        let currentLang = 'zh'; // 默认中文
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            
+            // 更新语言按钮文本
+            document.getElementById('langText').textContent = currentLang === 'zh' ? 'EN' : '中文';
+            
+            // 更新所有带有 data-zh 和 data-en 属性的元素
+            document.querySelectorAll('[data-zh][data-en]').forEach(element => {
+                const text = currentLang === 'zh' ? element.getAttribute('data-zh') : element.getAttribute('data-en');
+                element.innerHTML = text;
+            });
+            
+            // 更新页面语言属性
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+            
+            // 更新 URL 参数
+            const url = new URL(window.location);
+            url.searchParams.set('lang', currentLang);
+            window.history.replaceState({}, '', url);
+        }
+
+        // 页面加载时检查 URL 参数或 localStorage
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            const savedLang = localStorage.getItem('preferredLang');
+            
+            // 优先使用 URL 参数，其次使用 localStorage
+            const initialLang = urlLang || savedLang || 'zh';
+            
+            if (initialLang === 'en' && currentLang === 'zh') {
+                toggleLanguage();
+            }
+        });
+    </script>
 </body>
 </html>
