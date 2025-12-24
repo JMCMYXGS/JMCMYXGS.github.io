@@ -266,6 +266,7 @@
             color: #b0c4de;
             margin-top: 5px;
         }
+
         /* ===== 顶部官网栏 ===== */
         .top-bar {
             position: fixed;
@@ -273,10 +274,11 @@
             left: 0;
             width: 100%;
             height: 64px;
-            background: rgba(10, 14, 39, 0.85);
+            background: rgba(10, 14, 39, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .top-bar-inner {
@@ -284,6 +286,12 @@
             height: 100%;
             margin: 0 auto;
             padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .top-bar-left {
             display: flex;
             align-items: center;
         }
@@ -300,37 +308,94 @@
             letter-spacing: 1px;
         }
         
+        /* 语言切换按钮 */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-switcher:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .lang-icon {
+            width: 20px;
+            height: 20px;
+            fill: #ffd700;
+        }
+        
+        .lang-text {
+            color: #ffd700;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
         /* 给原 header 顶出空间，避免被挡住 */
         .header {
             margin-top: 64px;
         }
 
+        @media (max-width: 768px) {
+            .top-title {
+                font-size: 14px;
+            }
+            
+            .lang-switcher {
+                padding: 6px 12px;
+            }
+            
+            .lang-text {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- 顶部官网栏 -->
     <div class="top-bar">
         <div class="top-bar-inner">
-            <img src="assets/logo.jpg" alt="官网 Logo" class="top-logo">
-            <span class="top-title">加密科技传媒有限公司</span>
+            <div class="top-bar-left">
+                <img src="assets/logo.jpg" alt="官网 Logo" class="top-logo">
+                <span class="top-title" data-zh="加密科技传媒有限公司" data-en="Crypto Technology Media Ltd.">加密科技传媒有限公司</span>
+            </div>
+            <div class="lang-switcher" onclick="toggleLanguage()">
+                <svg class="lang-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+                </svg>
+                <span class="lang-text" id="langText">EN</span>
+            </div>
         </div>
     </div>
 
     <div class="header">
-        <h1>🚀 Web3 全方位服务平台</h1>
-        <p>从新闻营销到技术开发 | 从上币服务到市值管理 | 一站式加密货币解决方案</p>
+        <h1 data-zh="🚀 Web3 全方位服务平台" data-en="🚀 Web3 Comprehensive Service Platform">🚀 Web3 全方位服务平台</h1>
+        <p data-zh="从新闻营销到技术开发 | 从上币服务到市值管理 | 一站式加密货币解决方案" 
+           data-en="From News Marketing to Tech Development | From Listing Services to Market Making | One-Stop Crypto Solutions">
+            从新闻营销到技术开发 | 从上币服务到市值管理 | 一站式加密货币解决方案
+        </p>
         <div class="stats-bar">
             <div class="stat-item">
                 <div class="stat-number">1000+</div>
-                <div class="stat-label">成功项目</div>
+                <div class="stat-label" data-zh="成功项目" data-en="Successful Projects">成功项目</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">50+</div>
-                <div class="stat-label">合作平台</div>
+                <div class="stat-label" data-zh="合作平台" data-en="Partner Platforms">合作平台</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">24/7</div>
-                <div class="stat-label">专业服务</div>
+                <div class="stat-label" data-zh="专业服务" data-en="Professional Service">专业服务</div>
             </div>
         </div>
     </div>
@@ -340,56 +405,83 @@
         <div class="service-section">
             <div class="section-header">
                 <div class="section-icon">📰</div>
-                <h2>币安新闻投放 & 媒体营销</h2>
+                <h2 data-zh="币安新闻投放 & 媒体营销" data-en="Binance News & Media Marketing">币安新闻投放 & 媒体营销</h2>
             </div>
             <div class="service-grid">
                 <div class="service-card highlight-card">
-                    <h3>币安日报</h3>
-                    <p>Binance 官方日报推送，覆盖全球数百万用户，提升项目权威性和可信度</p>
+                    <h3 data-zh="币安日报" data-en="Binance Daily">币安日报</h3>
+                    <p data-zh="Binance 官方日报推送,覆盖全球数百万用户,提升项目权威性和可信度" 
+                       data-en="Official Binance Daily push, reaching millions of users worldwide, enhancing project authority and credibility">
+                        Binance 官方日报推送,覆盖全球数百万用户,提升项目权威性和可信度
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 全球曝光 ✓ 官方认证 ✓ 快速审核
+                        <span data-zh="✓ 全球曝光 ✓ 官方认证 ✓ 快速审核" data-en="✓ Global Exposure ✓ Official Verified ✓ Fast Review">✓ 全球曝光 ✓ 官方认证 ✓ 快速审核</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>星球日报 / 星球快讯</h3>
-                    <p>Odaily 星球日报快讯发布，行业头部媒体，精准触达专业投资者</p>
+                    <h3 data-zh="星球日报 / 星球快讯" data-en="Odaily / Breaking News">星球日报 / 星球快讯</h3>
+                    <p data-zh="Odaily 星球日报快讯发布,行业头部媒体,精准触达专业投资者" 
+                       data-en="Odaily breaking news release, leading industry media, precisely reaching professional investors">
+                        Odaily 星球日报快讯发布,行业头部媒体,精准触达专业投资者
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>金色财经快讯</h3>
-                    <p>金色财经快讯推送，24小时滚动播报，抢占市场热点</p>
+                    <h3 data-zh="金色财经快讯" data-en="Golden Finance Flash">金色财经快讯</h3>
+                    <p data-zh="金色财经快讯推送,24小时滚动播报,抢占市场热点" 
+                       data-en="Golden Finance flash push, 24/7 rolling updates, capturing market hotspots">
+                        金色财经快讯推送,24小时滚动播报,抢占市场热点
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>各大媒体 PR 推送</h3>
-                    <p>新闻稿多平台分发，包括 PANews、链闻、深潮等主流媒体</p>
+                    <h3 data-zh="各大媒体 PR 推送" data-en="Multi-Media PR Distribution">各大媒体 PR 推送</h3>
+                    <p data-zh="新闻稿多平台分发,包括 PANews、链闻、深潮等主流媒体" 
+                       data-en="Multi-platform press release distribution, including PANews, ChainNews, Foresight News and other mainstream media">
+                        新闻稿多平台分发,包括 PANews、链闻、深潮等主流媒体
+                    </p>
                     <div class="platform-logos">
                         <span class="platform-tag">PANews</span>
-                        <span class="platform-tag">链闻</span>
-                        <span class="platform-tag">深潮</span>
+                        <span class="platform-tag" data-zh="链闻" data-en="ChainNews">链闻</span>
+                        <span class="platform-tag" data-zh="深潮" data-en="Foresight">深潮</span>
                         <span class="platform-tag">BlockBeats</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>BTok 横幅 & 开屏广告</h3>
-                    <p>BTok App 首屏展示，高频次曝光，精准触达加密货币活跃用户</p>
+                    <h3 data-zh="BTok 横幅 & 开屏广告" data-en="BTok Banner & Splash Ads">BTok 横幅 & 开屏广告</h3>
+                    <p data-zh="BTok App 首屏展示,高频次曝光,精准触达加密货币活跃用户" 
+                       data-en="BTok App splash screen display, high-frequency exposure, precisely reaching active crypto users">
+                        BTok App 首屏展示,高频次曝光,精准触达加密货币活跃用户
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>TG / X 广告投放</h3>
-                    <p>Telegram 和 X（Twitter）精准广告投放，定向推送目标用户群体</p>
+                    <h3 data-zh="TG / X 广告投放" data-en="TG / X Advertising">TG / X 广告投放</h3>
+                    <p data-zh="Telegram 和 X（Twitter）精准广告投放,定向推送目标用户群体" 
+                       data-en="Targeted advertising on Telegram and X (Twitter), reaching specific user demographics">
+                        Telegram 和 X（Twitter）精准广告投放,定向推送目标用户群体
+                    </p>
                 </div>
                 <div class="service-card highlight-card">
-                    <h3>DEXTools 热搜趋势</h3>
-                    <p>DEXTools 热搜榜位，实时交易数据展示，吸引 DeFi 交易者关注</p>
+                    <h3 data-zh="DEXTools 热搜趋势" data-en="DEXTools Trending">DEXTools 热搜趋势</h3>
+                    <p data-zh="DEXTools 热搜榜位,实时交易数据展示,吸引 DeFi 交易者关注" 
+                       data-en="DEXTools trending position, real-time trading data display, attracting DeFi traders">
+                        DEXTools 热搜榜位,实时交易数据展示,吸引 DeFi 交易者关注
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 实时数据 ✓ 交易者聚集地 ✓ 高转化率
+                        <span data-zh="✓ 实时数据 ✓ 交易者聚集地 ✓ 高转化率" data-en="✓ Real-time Data ✓ Trader Hub ✓ High Conversion">✓ 实时数据 ✓ 交易者聚集地 ✓ 高转化率</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>老鹰收录</h3>
-                    <p>老鹰头像收录 + 热门趋势榜，提升项目辨识度和搜索权重</p>
+                    <h3 data-zh="老鹰收录" data-en="Eagle Listing">老鹰收录</h3>
+                    <p data-zh="老鹰头像收录 + 热门趋势榜,提升项目辨识度和搜索权重" 
+                       data-en="Eagle avatar listing + trending board, enhancing project recognition and search weight">
+                        老鹰头像收录 + 热门趋势榜,提升项目辨识度和搜索权重
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>AVE 全套服务</h3>
-                    <p>AVE 平台热搜、横屏广告、头像收录一站式解决方案</p>
+                    <h3 data-zh="AVE 全套服务" data-en="AVE Full Package">AVE 全套服务</h3>
+                    <p data-zh="AVE 平台热搜、横屏广告、头像收录一站式解决方案" 
+                       data-en="AVE platform trending, banner ads, avatar listing - one-stop solution">
+                        AVE 平台热搜、横屏广告、头像收录一站式解决方案
+                    </p>
                 </div>
             </div>
         </div>
@@ -398,51 +490,72 @@
         <div class="service-section">
             <div class="section-header">
                 <div class="section-icon">💎</div>
-                <h2>上币 & 收录服务</h2>
+                <h2 data-zh="上币 & 收录服务" data-en="Listing & Directory Services">上币 & 收录服务</h2>
             </div>
             <div class="service-grid">
                 <div class="service-card highlight-card">
-                    <h3>CoinMarketCap 收录</h3>
-                    <p>CMC 官方收录，全球最大加密货币数据平台，必备基础设施</p>
+                    <h3 data-zh="CoinMarketCap 收录" data-en="CoinMarketCap Listing">CoinMarketCap 收录</h3>
+                    <p data-zh="CMC 官方收录,全球最大加密货币数据平台,必备基础设施" 
+                       data-en="Official CMC listing, world's largest crypto data platform, essential infrastructure">
+                        CMC 官方收录,全球最大加密货币数据平台,必备基础设施
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 提升可信度 ✓ 增加流动性 ✓ SEO 优化
+                        <span data-zh="✓ 提升可信度 ✓ 增加流动性 ✓ SEO 优化" data-en="✓ Credibility ✓ Liquidity ✓ SEO Boost">✓ 提升可信度 ✓ 增加流动性 ✓ SEO 优化</span>
                     </div>
                 </div>
                 <div class="service-card highlight-card">
-                    <h3>CoinGecko 收录</h3>
-                    <p>CG 平台收录，全球第二大数据聚合平台，补充 CMC 覆盖</p>
+                    <h3 data-zh="CoinGecko 收录" data-en="CoinGecko Listing">CoinGecko 收录</h3>
+                    <p data-zh="CG 平台收录,全球第二大数据聚合平台,补充 CMC 覆盖" 
+                       data-en="CG platform listing, world's 2nd largest data aggregator, complementing CMC coverage">
+                        CG 平台收录,全球第二大数据聚合平台,补充 CMC 覆盖
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>非小号收录</h3>
-                    <p>中文市场最大数据平台，覆盖华语圈投资者</p>
+                    <h3 data-zh="非小号收录" data-en="Feixiaohao Listing">非小号收录</h3>
+                    <p data-zh="中文市场最大数据平台,覆盖华语圈投资者" 
+                       data-en="Largest Chinese data platform, covering Chinese-speaking investors">
+                        中文市场最大数据平台,覆盖华语圈投资者
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>Gate Alpha 上币</h3>
-                    <p>Gate.io Alpha 区上币通道，快速上线二线交易所</p>
+                    <h3 data-zh="Gate Alpha 上币" data-en="Gate Alpha Listing">Gate Alpha 上币</h3>
+                    <p data-zh="Gate.io Alpha 区上币通道,快速上线二线交易所" 
+                       data-en="Gate.io Alpha listing channel, quick access to tier-2 exchanges">
+                        Gate.io Alpha 区上币通道,快速上线二线交易所
+                    </p>
                 </div>
                 <div class="service-card highlight-card">
-                    <h3>🔥 币安新闻组合套餐</h3>
-                    <p>带币上 Binance 新闻，含 CMC/CG 收录 + 币安日报推送</p>
-                    <span class="combo-badge">热门套餐</span>
+                    <h3 data-zh="🔥 币安新闻组合套餐" data-en="🔥 Binance News Combo">🔥 币安新闻组合套餐</h3>
+                    <p data-zh="带币上 Binance 新闻,含 CMC/CG 收录 + 币安日报推送" 
+                       data-en="Binance news featuring your token, including CMC/CG listing + Binance Daily push">
+                        带币上 Binance 新闻,含 CMC/CG 收录 + 币安日报推送
+                    </p>
+                    <span class="combo-badge" data-zh="热门套餐" data-en="Hot Package">热门套餐</span>
                     <div class="feature-highlight">
-                        一次购买，全套服务，性价比之选
+                        <span data-zh="一次购买,全套服务,性价比之选" data-en="One purchase, full service, best value">一次购买,全套服务,性价比之选</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>CEX 交易所上币通道</h3>
-                    <p>MEXC、BitMart、Bitget、芝麻、热币、火币等多交易所上币渠道</p>
+                    <h3 data-zh="CEX 交易所上币通道" data-en="CEX Exchange Listing">CEX 交易所上币通道</h3>
+                    <p data-zh="MEXC、BitMart、Bitget、芝麻、热币、火币等多交易所上币渠道" 
+                       data-en="Multi-exchange listing channels: MEXC, BitMart, Bitget, Zhima, HotCoin, HTX, etc.">
+                        MEXC、BitMart、Bitget、芝麻、热币、火币等多交易所上币渠道
+                    </p>
                     <div class="platform-logos">
                         <span class="platform-tag">MEXC</span>
                         <span class="platform-tag">BitMart</span>
-                        <span class="platform-tag">Bitget芝麻</span>
-                        <span class="platform-tag">热币</span>
-                        <span class="platform-tag">火币</span>
-                        <span class="platform-tag">币安</span>
+                        <span class="platform-tag" data-zh="Bitget芝麻" data-en="Bitget">Bitget芝麻</span>
+                        <span class="platform-tag" data-zh="热币" data-en="HotCoin">热币</span>
+                        <span class="platform-tag" data-zh="火币" data-en="HTX">火币</span>
+                        <span class="platform-tag" data-zh="币安" data-en="Binance">币安</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>各大平台热搜榜位</h3>
-                    <p>各大平台热搜榜、趋势榜推广，制造 FOMO 效应</p>
+                    <h3 data-zh="各大平台热搜榜位" data-en="Platform Trending Positions">各大平台热搜榜位</h3>
+                    <p data-zh="各大平台热搜榜、趋势榜推广,制造 FOMO 效应" 
+                       data-en="Trending and hot boards promotion across platforms, creating FOMO effect">
+                        各大平台热搜榜、趋势榜推广,制造 FOMO 效应
+                    </p>
                 </div>
             </div>
         </div>
@@ -451,35 +564,53 @@
         <div class="service-section">
             <div class="section-header">
                 <div class="section-icon">🎨</div>
-                <h2>钱包头像 & 认证服务</h2>
+                <h2 data-zh="钱包头像 & 认证服务" data-en="Wallet Logo & Verification">钱包头像 & 认证服务</h2>
             </div>
             <div class="service-grid">
                 <div class="service-card">
-                    <h3>OKX 钱包头像</h3>
-                    <p>OKX Web3 钱包官方头像上传，提升代币辨识度</p>
+                    <h3 data-zh="OKX 钱包头像" data-en="OKX Wallet Logo">OKX 钱包头像</h3>
+                    <p data-zh="OKX Web3 钱包官方头像上传,提升代币辨识度" 
+                       data-en="Official OKX Web3 wallet logo upload, enhancing token recognition">
+                        OKX Web3 钱包官方头像上传,提升代币辨识度
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>TokenPocket 钱包头像</h3>
-                    <p>TP 钱包头像收录，覆盖移动端用户</p>
+                    <h3 data-zh="TokenPocket 钱包头像" data-en="TokenPocket Wallet Logo">TokenPocket 钱包头像</h3>
+                    <p data-zh="TP 钱包头像收录,覆盖移动端用户" 
+                       data-en="TP wallet logo listing, covering mobile users">
+                        TP 钱包头像收录,覆盖移动端用户
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>Bitget / Bybit 钱包头像</h3>
-                    <p>主流 CEX 钱包头像上传，多平台覆盖</p>
+                    <h3 data-zh="Bitget / Bybit 钱包头像" data-en="Bitget / Bybit Wallet Logo">Bitget / Bybit 钱包头像</h3>
+                    <p data-zh="主流 CEX 钱包头像上传,多平台覆盖" 
+                       data-en="Mainstream CEX wallet logo upload, multi-platform coverage">
+                        主流 CEX 钱包头像上传,多平台覆盖
+                    </p>
                 </div>
                 <div class="service-card highlight-card">
-                    <h3>链上 CA 认证</h3>
-                    <p>合约地址官方认证 + Logo 上传，防止假币仿盘</p>
+                    <h3 data-zh="链上 CA 认证" data-en="On-chain CA Verification">链上 CA 认证</h3>
+                    <p data-zh="合约地址官方认证 + Logo 上传,防止假币仿盘" 
+                       data-en="Official contract address verification + logo upload, preventing fake tokens">
+                        合约地址官方认证 + Logo 上传,防止假币仿盘
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 官方认证标识 ✓ 防伪保护 ✓ 提升信任度
+                        <span data-zh="✓ 官方认证标识 ✓ 防伪保护 ✓ 提升信任度" data-en="✓ Official Badge ✓ Anti-fraud ✓ Trust Boost">✓ 官方认证标识 ✓ 防伪保护 ✓ 提升信任度</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>DEXTools Logo 上传</h3>
-                    <p>DEXTools 平台 Logo 展示，完善项目形象</p>
+                    <h3 data-zh="DEXTools Logo 上传" data-en="DEXTools Logo Upload">DEXTools Logo 上传</h3>
+                    <p data-zh="DEXTools 平台 Logo 展示,完善项目形象" 
+                       data-en="DEXTools platform logo display, completing project image">
+                        DEXTools 平台 Logo 展示,完善项目形象
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>老鹦薄饼多平台头像收录</h3>
-                    <p>以及其他各大平台头像收录服务</p>
+                    <h3 data-zh="老鹦薄饼多平台头像收录" data-en="Multi-platform Logo Listing">老鹦薄饼多平台头像收录</h3>
+                    <p data-zh="以及其他各大平台头像收录服务" 
+                       data-en="And other major platform logo listing services">
+                        以及其他各大平台头像收录服务
+                    </p>
                 </div>
             </div>
         </div>
@@ -488,62 +619,93 @@
         <div class="service-section">
             <div class="section-header">
                 <div class="section-icon">⚙️</div>
-                <h2>技术开发服务</h2>
+                <h2 data-zh="技术开发服务" data-en="Technical Development">技术开发服务</h2>
             </div>
             <div class="service-grid">
                 <div class="service-card highlight-card">
-                    <h3>智能合约开发 （仅限海外项目，不服务不支持加密货币的国家）</h3>
-                    <p>ERC20/BEP20/TRC20 标准合约，支持税收、销毁、分红等高级功能</p>
+                    <h3 data-zh="智能合约开发 （仅限海外项目,不服务不支持加密货币的国家）" 
+                        data-en="Smart Contract Development (Overseas projects only, not available in regions where crypto is restricted)">
+                        智能合约开发 （仅限海外项目,不服务不支持加密货币的国家）
+                    </h3>
+                    <p data-zh="ERC20/BEP20/TRC20 标准合约,支持税收、销毁、分红等高级功能" 
+                       data-en="ERC20/BEP20/TRC20 standard contracts, supporting tax, burn, dividend and other advanced features">
+                        ERC20/BEP20/TRC20 标准合约,支持税收、销毁、分红等高级功能
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 安全审计 ✓ 防貔貅机制 ✓ 开源验证
+                        <span data-zh="✓ 安全审计 ✓ 防貔貅机制 ✓ 开源验证" data-en="✓ Security Audit ✓ Anti-rug ✓ Open Source">✓ 安全审计 ✓ 防貔貅机制 ✓ 开源验证</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>DApp 开发</h3>
-                    <p>去中心化应用全栈开发，包括 DeFi、NFT、GameFi 等</p>
+                    <h3 data-zh="DApp 开发" data-en="DApp Development">DApp 开发</h3>
+                    <p data-zh="去中心化应用全栈开发,包括 DeFi、NFT、GameFi 等" 
+                       data-en="Full-stack decentralized application development, including DeFi, NFT, GameFi, etc.">
+                        去中心化应用全栈开发,包括 DeFi、NFT、GameFi 等
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>交易所网站开发</h3>
-                    <p>交易所系统，支持实时K线、深度图、订单簿、合约、现货等其他交易所基本具备功能</p>
+                    <h3 data-zh="交易所网站开发" data-en="Exchange Platform Development">交易所网站开发</h3>
+                    <p data-zh="交易所系统,支持实时K线、深度图、订单簿、合约、现货等其他交易所基本具备功能" 
+                       data-en="Exchange system with real-time K-line, depth chart, order book, futures, spot and other essential features">
+                        交易所系统,支持实时K线、深度图、订单簿、合约、现货等其他交易所基本具备功能
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>Web3 官网开发</h3>
-                    <p>专业 Web3 项目官网，支持钱包连接、多链切换（meme）</p>
+                    <h3 data-zh="Web3 官网开发" data-en="Web3 Website Development">Web3 官网开发</h3>
+                    <p data-zh="专业 Web3 项目官网,支持钱包连接、多链切换（meme）" 
+                       data-en="Professional Web3 project website, supporting wallet connection and multi-chain switching (meme)">
+                        专业 Web3 项目官网,支持钱包连接、多链切换（meme）
+                    </p>
                 </div>
                 <div class="service-card highlight-card">
-                    <h3>Launchpad 平台开发</h3>
-                    <p>IDO/IEO 发射台系统，包含白名单、质押、预售等完整功能</p>
+                    <h3 data-zh="Launchpad 平台开发" data-en="Launchpad Platform Development">Launchpad 平台开发</h3>
+                    <p data-zh="IDO/IEO 发射台系统,包含白名单、质押、预售等完整功能" 
+                       data-en="IDO/IEO launchpad system with whitelist, staking, presale and complete features">
+                        IDO/IEO 发射台系统,包含白名单、质押、预售等完整功能
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 公平发射 ✓ 防科学家 ✓ 流动性锁定
+                        <span data-zh="✓ 公平发射 ✓ 防科学家 ✓ 流动性锁定" data-en="✓ Fair Launch ✓ Anti-bot ✓ Liquidity Lock">✓ 公平发射 ✓ 防科学家 ✓ 流动性锁定</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>锁仓 & 质押系统</h3>
-                    <p>代币锁仓合约、流动性质押、收益分配系统开发</p>
+                    <h3 data-zh="锁仓 & 质押系统" data-en="Locking & Staking System">锁仓 & 质押系统</h3>
+                    <p data-zh="代币锁仓合约、流动性质押、收益分配系统开发" 
+                       data-en="Token locking contract, liquidity staking, reward distribution system development">
+                        代币锁仓合约、流动性质押、收益分配系统开发
+                    </p>
                 </div>
             </div>
         </div>
+
         <!-- 5. 安全审计 & 风险检测 -->
         <div class="service-section">
             <div class="section-header">
                 <div class="section-icon">🛡️</div>
-                <h2>安全审计</h2>
+                <h2 data-zh="安全审计" data-en="Security Audit">安全审计</h2>
             </div>
             <div class="service-grid">
                 <div class="service-card highlight-card">
-                    <h3>智能合约安全审计</h3>
-                    <p>权威机构专业审计报告，覆盖常见漏洞检测与修复建议</p>
+                    <h3 data-zh="智能合约安全审计" data-en="Smart Contract Security Audit">智能合约安全审计</h3>
+                    <p data-zh="权威机构专业审计报告,覆盖常见漏洞检测与修复建议" 
+                       data-en="Professional audit report from authoritative agencies, covering common vulnerability detection and fix recommendations">
+                        权威机构专业审计报告,覆盖常见漏洞检测与修复建议
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 专业审计 ✓ 详细报告 ✓ 持续监控
+                        <span data-zh="✓ 专业审计 ✓ 详细报告 ✓ 持续监控" data-en="✓ Professional Audit ✓ Detailed Report ✓ Continuous Monitoring">✓ 专业审计 ✓ 详细报告 ✓ 持续监控</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>蜜罐检测服务</h3>
-                    <p>智能识别蜜罐合约，保护投资者资金安全</p>
+                    <h3 data-zh="蜜罐检测服务" data-en="Honeypot Detection">蜜罐检测服务</h3>
+                    <p data-zh="智能识别蜜罐合约,保护投资者资金安全" 
+                       data-en="Smart honeypot contract detection, protecting investor funds">
+                        智能识别蜜罐合约,保护投资者资金安全
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>审计服务报告</h3>
-                    <p>国外权威机构全方面安全审计报告，全方面扫描代币合约</p>
+                    <h3 data-zh="审计服务报告" data-en="Audit Service Report">审计服务报告</h3>
+                    <p data-zh="国外权威机构全方面安全审计报告,全方面扫描代币合约" 
+                       data-en="Comprehensive security audit report from international authorities, full token contract scanning">
+                        国外权威机构全方面安全审计报告,全方面扫描代币合约
+                    </p>
                 </div>
             </div>
         </div>
@@ -552,134 +714,162 @@
         <div class="service-section">
             <div class="section-header">
                 <div class="section-icon">🤖</div>
-                <h2>市值管理</h2>
+                <h2 data-zh="市值管理" data-en="Market Making">市值管理</h2>
             </div>
             <div class="service-grid">
                 <div class="service-card">
-                    <h3>市值管理机器人</h3>
-                    <p>智能做市系统，维持价格稳定，提供充足流动性</p>
+                    <h3 data-zh="市值管理机器人" data-en="Market Making Bot">市值管理机器人</h3>
+                    <p data-zh="智能做市系统,维持价格稳定,提供充足流动性" 
+                       data-en="Intelligent market making system, maintaining price stability and providing sufficient liquidity">
+                        智能做市系统,维持价格稳定,提供充足流动性
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 24/7 运行 ✓ 智能算法 ✓ 风险可控
+                        <span data-zh="✓ 24/7 运行 ✓ 智能算法 ✓ 风险可控" data-en="✓ 24/7 Operation ✓ Smart Algorithm ✓ Risk Control">✓ 24/7 运行 ✓ 智能算法 ✓ 风险可控</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>自动做市商（AMM）</h3>
-                    <p>定制化做市策略，支持多链部署，优化深度</p>
+                    <h3 data-zh="自动做市商（AMM）" data-en="Automated Market Maker (AMM)">自动做市商（AMM）</h3>
+                    <p data-zh="定制化做市策略,支持多链部署,优化深度" 
+                       data-en="Customized market making strategy, multi-chain deployment, depth optimization">
+                        定制化做市策略,支持多链部署,优化深度
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 低滑点 ✓ 高效率 ✓ 数据驱动
+                        <span data-zh="✓ 低滑点 ✓ 高效率 ✓ 数据驱动" data-en="✓ Low Slippage ✓ High Efficiency ✓ Data-driven">✓ 低滑点 ✓ 高效率 ✓ 数据驱动</span>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- 7. 运营类业务 -->
         <div class="service-section">
             <div class="section-header">
                 <div class="section-icon">📢</div>
-                <h2>社区运营 & 内容创作</h2>
+                <h2 data-zh="社区运营 & 内容创作" data-en="Community & Content Creation">社区运营 & 内容创作</h2>
             </div>
             <div class="service-grid">
                 <div class="service-card">
-                    <h3>X运营</h3>
-                    <p>推特账号代运营，包含内容策划、KOL 联动、热点追踪和账号长期运营</p>
+                    <h3 data-zh="X运营" data-en="X (Twitter) Management">X运营</h3>
+                    <p data-zh="推特账号代运营,包含内容策划、KOL 联动、热点追踪和账号长期运营" 
+                       data-en="Twitter account management, including content planning, KOL collaboration, trending topics and long-term operation">
+                        推特账号代运营,包含内容策划、KOL 联动、热点追踪和账号长期运营
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>Telegram 社群运营</h3>
-                    <p>TG 群组管理、机器人设定、社区活动策划</p>
+                    <h3 data-zh="Telegram 社群运营" data-en="Telegram Community Management">Telegram 社群运营</h3>
+                    <p data-zh="TG 群组管理、机器人设定、社区活动策划" 
+                       data-en="TG group management, bot setup, community event planning">
+                        TG 群组管理、机器人设定、社区活动策划
+                    </p>
                 </div>
                 <div class="service-card highlight-card">
-                    <h3>视频制作</h3>
-                    <p>AMA 剪辑、项目宣传片、教程视频、动画 Explainer</p>
+                    <h3 data-zh="视频制作" data-en="Video Production">视频制作</h3>
+                    <p data-zh="AMA 剪辑、项目宣传片、教程视频、动画 Explainer" 
+                       data-en="AMA editing, project promo videos, tutorial videos, animated explainers">
+                        AMA 剪辑、项目宣传片、教程视频、动画 Explainer
+                    </p>
                     <div class="feature-highlight">
-                        ✓ 专业团队 ✓ 多语言字幕 ✓ 跨平台分发
+                        <span data-zh="✓ 专业团队 ✓ 多语言字幕 ✓ 跨平台分发" data-en="✓ Professional Team ✓ Multi-language Subtitles ✓ Cross-platform Distribution">✓ 专业团队 ✓ 多语言字幕 ✓ 跨平台分发</span>
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>白皮书设计</h3>
-                    <p>专业白皮书撰写与排版，符合行业规范与审美</p>
+                    <h3 data-zh="白皮书设计" data-en="Whitepaper Design">白皮书设计</h3>
+                    <p data-zh="专业白皮书撰写与排版,符合行业规范与审美" 
+                       data-en="Professional whitepaper writing and layout, conforming to industry standards and aesthetics">
+                        专业白皮书撰写与排版,符合行业规范与审美
+                    </p>
                 </div>
                 <div class="service-card">
-                    <h3>PPT & 官网文案</h3>
-                    <p>路演 PPT 设计、官网文案策划、中英文文案服务</p>
+                    <h3 data-zh="PPT & 官网文案" data-en="PPT & Website Copywriting">PPT & 官网文案</h3>
+                    <p data-zh="路演 PPT 设计、官网文案策划、中英文文案服务" 
+                       data-en="Roadshow PPT design, website copywriting, Chinese-English copywriting services">
+                        路演 PPT 设计、官网文案策划、中英文文案服务
+                    </p>
                 </div>
                 <div class="service-card highlight-card">
-                    <h3>项目整体包装（0到1）</h3>
-                    <p>从概念到上线的全流程服务，包含品牌、技术、运营</p>
-                    <span class="combo-badge">全套方案</span>
+                    <h3 data-zh="项目整体包装（0到1）" data-en="Project Full Package (0 to 1)">项目整体包装（0到1）</h3>
+                    <p data-zh="从概念到上线的全流程服务,包含品牌、技术、运营" 
+                       data-en="Full-cycle service from concept to launch, including branding, technology, and operations">
+                        从概念到上线的全流程服务,包含品牌、技术、运营
+                    </p>
+                    <span class="combo-badge" data-zh="全套方案" data-en="Complete Solution">全套方案</span>
                 </div>
             </div>
         </div>
-
-        
-
-        
 
         <!-- 价格展示区域 -->
         <div class="service-section" id="pricing">
             <div class="section-header">
                 <div class="section-icon">💰</div>
-                <h2>服务报价参考</h2>
+                <h2 data-zh="服务报价参考" data-en="Service Pricing Reference">服务报价参考</h2>
             </div>
             <div style="text-align: center; margin-bottom: 30px; color: #b0c4de;">
-                <p>以下为参考价格,具体报价根据项目需求定制</p>
+                <p data-zh="以下为参考价格,具体报价根据项目需求定制" 
+                   data-en="Reference prices below, specific quotes customized based on project requirements">
+                    以下为参考价格,具体报价根据项目需求定制
+                </p>
             </div>
             <div class="service-grid">
                 <div class="service-card">
-                    <h3>🥉 基础套餐</h3>
+                    <h3 data-zh="🥉 基础套餐" data-en="🥉 Basic Package">🥉 基础套餐</h3>
                     <div style="font-size: 2em; color: #ffd700; margin: 20px 0;">$8,888+</div>
-                    <p style="margin-bottom: 15px;">适合初创项目</p>
+                    <p style="margin-bottom: 15px;" data-zh="适合初创项目" data-en="Suitable for startups">适合初创项目</p>
                     <div style="text-align: left; color: #b0c4de; line-height: 2;">
-                        ✓ CMC/CG 收录<br>
-                        ✓ 1-2个钱包头像<br>
-                        ✓ 基础合约开发<br>
-                        ✓ 简单官网设计
+                        <span data-zh="✓ CMC/CG 收录" data-en="✓ CMC/CG Listing">✓ CMC/CG 收录</span><br>
+                        <span data-zh="✓ 1-2个钱包头像" data-en="✓ 1-2 Wallet Logos">✓ 1-2个钱包头像</span><br>
+                        <span data-zh="✓ 基础合约开发" data-en="✓ Basic Contract Development">✓ 基础合约开发</span><br>
+                        <span data-zh="✓ 简单官网设计" data-en="✓ Simple Website Design">✓ 简单官网设计</span>
                     </div>
                 </div>
                 <div class="service-card highlight-card">
-                    <h3>🥈 进阶套餐</h3>
+                    <h3 data-zh="🥈 进阶套餐" data-en="🥈 Advanced Package">🥈 进阶套餐</h3>
                     <div style="font-size: 2em; color: #ffd700; margin: 20px 0;">$15,888+</div>
-                    <p style="margin-bottom: 15px;">热门选择 - 性价比最高</p>
+                    <p style="margin-bottom: 15px;" data-zh="热门选择 - 性价比最高" data-en="Popular Choice - Best Value">热门选择 - 性价比最高</p>
                     <div style="text-align: left; color: #b0c4de; line-height: 2;">
-                        ✓ 币安日报推送<br>
-                        ✓ 全平台收录<br>
-                        ✓ DEX 热搜<br>
-                        ✓ 5+媒体推送<br>
-                        ✓ 钱包头像全覆盖<br>
-                        ✓ 合约审计报告<br>
-                        ✓ 社群运营
+                        <span data-zh="✓ 币安日报推送" data-en="✓ Binance Daily Push">✓ 币安日报推送</span><br>
+                        <span data-zh="✓ 全平台收录" data-en="✓ All-platform Listing">✓ 全平台收录</span><br>
+                        <span data-zh="✓ DEX 热搜" data-en="✓ DEX Trending">✓ DEX 热搜</span><br>
+                        <span data-zh="✓ 5+媒体推送" data-en="✓ 5+ Media Push">✓ 5+媒体推送</span><br>
+                        <span data-zh="✓ 钱包头像全覆盖" data-en="✓ Full Wallet Logo Coverage">✓ 钱包头像全覆盖</span><br>
+                        <span data-zh="✓ 合约审计报告" data-en="✓ Contract Audit Report">✓ 合约审计报告</span><br>
+                        <span data-zh="✓ 社群运营" data-en="✓ Community Management">✓ 社群运营</span>
                     </div>
-                    <span class="combo-badge">最受欢迎</span>
+                    <span class="combo-badge" data-zh="最受欢迎" data-en="Most Popular">最受欢迎</span>
                 </div>
                 <div class="service-card">
-                    <h3>🥇 旗舰套餐</h3>
+                    <h3 data-zh="🥇 旗舰套餐" data-en="🥇 Premium Package">🥇 旗舰套餐</h3>
                     <div style="font-size: 2em; color: #ffd700; margin: 20px 0;">$35,888+</div>
-                    <p style="margin-bottom: 15px;">全方位解决方案</p>
+                    <p style="margin-bottom: 15px;" data-zh="全方位解决方案" data-en="Comprehensive Solution">全方位解决方案</p>
                     <div style="text-align: left; color: #b0c4de; line-height: 2;">
-                        ✓ 0到1全流程服务<br>
-                        ✓ 币安+全媒体矩阵<br>
-                        ✓ Gate Alpha 上币<br>
-                        ✓ Launchpad 开发<br>
-                        ✓ 市值管理机器人<br>
-                        ✓ 运营托管<br>
-                        ✓ 专属项目经理<br>
-                        ✓ KOL 联动推广
+                        <span data-zh="✓ 0到1全流程服务" data-en="✓ 0 to 1 Full Service">✓ 0到1全流程服务</span><br>
+                        <span data-zh="✓ 币安+全媒体矩阵" data-en="✓ Binance + Full Media Matrix">✓ 币安+全媒体矩阵</span><br>
+                        <span data-zh="✓ Gate Alpha 上币" data-en="✓ Gate Alpha Listing">✓ Gate Alpha 上币</span><br>
+                        <span data-zh="✓ Launchpad 开发" data-en="✓ Launchpad Development">✓ Launchpad 开发</span><br>
+                        <span data-zh="✓ 市值管理机器人" data-en="✓ Market Making Bot">✓ 市值管理机器人</span><br>
+                        <span data-zh="✓ 运营托管" data-en="✓ Operations Management">✓ 运营托管</span><br>
+                        <span data-zh="✓ 专属项目经理" data-en="✓ Dedicated Project Manager">✓ 专属项目经理</span><br>
+                        <span data-zh="✓ KOL 联动推广" data-en="✓ KOL Collaboration">✓ KOL 联动推广</span>
                     </div>
                 </div>
                 <div class="service-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%); border: 2px dashed #ffd700;">
-                    <h3 style="text-align: center; font-size: 1.5em;">🎯 定制化企业方案</h3>
-                    <p style="text-align: center; margin-top: 15px; font-size: 1.1em;">
+                    <h3 style="text-align: center; font-size: 1.5em;" data-zh="🎯 定制化企业方案" data-en="🎯 Custom Enterprise Solutions">🎯 定制化企业方案</h3>
+                    <p style="text-align: center; margin-top: 15px; font-size: 1.1em;" 
+                       data-zh="针对大型项目、DAO组织、交易所等机构客户,我们提供完全定制化的解决方案。<br>包含但不限于:专属技术架构、长期运营支持、多链部署、合规咨询等。" 
+                       data-en="For large projects, DAOs, exchanges and institutional clients, we provide fully customized solutions.<br>Including but not limited to: dedicated technical architecture, long-term operational support, multi-chain deployment, compliance consulting, etc.">
                         针对大型项目、DAO组织、交易所等机构客户,我们提供完全定制化的解决方案。<br>
                         包含但不限于:专属技术架构、长期运营支持、多链部署、合规咨询等。
                     </p>
                     <div style="text-align: center; margin-top: 20px;">
                         <a href="https://t.me/AJMSKA" target="_blank" style="color: #ffd700; text-decoration: none; font-size: 1.2em; font-weight: bold;">
-                            📞 联系我们获取专属报价 →
+                            <span data-zh="📞 联系我们获取专属报价 →" data-en="📞 Contact Us for Custom Quote →">📞 联系我们获取专属报价 →</span>
                         </a>
                     </div>
                 </div>
             </div>
             <div style="margin-top: 40px; padding: 20px; background: rgba(255, 215, 0, 0.05); border-radius: 10px; border-left: 4px solid #ffd700;">
-                <p style="color: #ffd700; font-weight: bold; margin-bottom: 10px;">💡 价格说明:</p>
-                <p style="color: #b0c4de; line-height: 1.8;">
+                <p style="color: #ffd700; font-weight: bold; margin-bottom: 10px;" data-zh="💡 价格说明:" data-en="💡 Pricing Notes:">💡 价格说明:</p>
+                <p style="color: #b0c4de; line-height: 1.8;" 
+                   data-zh="• 以上价格为参考起步价,最终报价根据具体需求、服务周期、紧急程度等因素调整<br>• 长期合作客户享受优惠折扣<br>• 急单需加收加急手续费<br>• 支持 USDT/USDC/ETH/BNB 等加密货币支付" 
+                   data-en="• Above prices are reference starting prices, final quotes adjusted based on specific requirements, service period, urgency, etc.<br>• Long-term cooperation clients enjoy preferential discounts<br>• Rush orders require express fees<br>• Accepts USDT/USDC/ETH/BNB and other crypto payments">
                     • 以上价格为参考起步价,最终报价根据具体需求、服务周期、紧急程度等因素调整<br>
                     • 长期合作客户享受优惠折扣<br>
                     • 急单需加收加急手续费<br>
@@ -688,30 +878,22 @@
             </div>
         </div>
 
-        <!-- CTA Section
-        <div class="cta-section">
-            <h2 style="font-size: 2.5em; margin-bottom: 20px; color: #ffd700;">🚀 开启您的 Web3 之旅</h2>
-            <p style="font-size: 1.2em; margin-bottom: 40px; color: #b0c4de;">
-                专业团队 | 一站式服务 | 7×24小时响应
-            </p>
-            <a href="https://t.me/AJMSKA" target="_blank" class="cta-button">立即咨询客服</a>
-            <a href="#pricing" class="cta-button" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">查看报价</a>
-            <div style="margin-top: 40px; color: #b0c4de;">
-                <p>
-                    📱 Telegram: <a href="https://t.me/AAJJSSA" target="_blank" style="color: #ffd700; text-decoration: none; font-weight: bold;">@AAJJSSA</a> | 
-                    📧 X: <a href="https://x.com/chh352h?s=21" target="_blank" style="color: #ffd700; text-decoration: none; font-weight: bold;">@chh352h</a>
-                </p>
-                <p style="margin-top: 10px;">⚡ 急单加急通道 | 💼 企业级定制方案</p>
-            </div>
-        </div> -->
         <!-- CTA Section -->
         <div class="cta-section">
-            <h2 style="font-size: 2.5em; margin-bottom: 20px; color: #ffd700;">🚀 开启您的 Web3 之旅</h2>
-            <p style="font-size: 1.2em; margin-bottom: 40px; color: #b0c4de;">
+            <h2 style="font-size: 2.5em; margin-bottom: 20px; color: #ffd700;" 
+                data-zh="🚀 开启您的 Web3 之旅" 
+                data-en="🚀 Start Your Web3 Journey">🚀 开启您的 Web3 之旅</h2>
+            <p style="font-size: 1.2em; margin-bottom: 40px; color: #b0c4de;" 
+               data-zh="专业团队 | 一站式服务 | 7×24小时响应" 
+               data-en="Professional Team | One-Stop Service | 24/7 Response">
                 专业团队 | 一站式服务 | 7×24小时响应
             </p>
-            <a href="https://t.me/AJMSKA" target="_blank" class="cta-button">立即咨询客服</a>
-            <a href="#pricing" class="cta-button" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">查看报价</a>
+            <a href="https://t.me/AJMSKA" target="_blank" class="cta-button">
+                <span data-zh="立即咨询客服" data-en="Contact Support Now">立即咨询客服</span>
+            </a>
+            <a href="#pricing" class="cta-button" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
+                <span data-zh="查看报价" data-en="View Pricing">查看报价</span>
+            </a>
 
             <div style="margin-top: 40px; color: #b0c4de;">
                 <p style="display:flex; align-items:center; justify-content:center; gap:16px; margin:0;">
@@ -730,28 +912,17 @@
                         <path fill="#ffd700" d="M18.9 2H22l-6.8 7.8L23.2 22h-6.6l-5.2-6.7L5.6 22H2l7.4-8.5L1.1 2h6.7l4.7 6.1L18.9 2zm-1.2 18h1.7L7.3 3.9H5.5L17.7 20z"/>
                       </svg>
                     </a>
-                  </p>
-                  
+                </p>
 
-                <!-- <p style="margin-top: 10px;">⚡ 急单加急通道 | 💼 企业级定制方案</p> -->
                 <p style="margin-top: 10px; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap;">
-
                     <!-- 急单加急通道 -->
                     <a href="https://t.me/AAJJSSA"
                        target="_blank"
-                       style="
-                         display:inline-flex;
-                         align-items:center;
-                         gap:6px;
-                         color:#b0c4de;
-                         text-decoration:none;
-                         font-weight:500;
-                       ">
-                        <!-- 闪电图标 -->
+                       style="display:inline-flex; align-items:center; gap:6px; color:#b0c4de; text-decoration:none; font-weight:500;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffd700" aria-hidden="true">
                             <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
                         </svg>
-                        急单加急通道
+                        <span data-zh="急单加急通道" data-en="Express Service">急单加急通道</span>
                     </a>
                 
                     <span style="color:#b0c4de;">|</span>
@@ -759,30 +930,54 @@
                     <!-- 服务条款 -->
                     <a href="/terms.html"
                        target="_blank"
-                       style="
-                         display:inline-flex;
-                         align-items:center;
-                         gap:6px;
-                         color:#b0c4de;
-                         text-decoration:none;
-                         font-weight:500;
-                       ">
-                        <!-- 文档图标 -->
+                       style="display:inline-flex; align-items:center; gap:6px; color:#b0c4de; text-decoration:none; font-weight:500;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="#b0c4de" aria-hidden="true">
                             <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5z"/>
                         </svg>
-                        服务条款
+                        <span data-zh="服务条款" data-en="Terms of Service">服务条款</span>
                     </a>
-                
                 </p>
-
-
             </div>
         </div>
-
     </div>
 
     <script>
+        // 语言切换功能
+        let currentLang = 'zh'; // 默认中文
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            
+            // 更新语言按钮文本
+            document.getElementById('langText').textContent = currentLang === 'zh' ? 'EN' : '中文';
+            
+            // 更新所有带有 data-zh 和 data-en 属性的元素
+            document.querySelectorAll('[data-zh][data-en]').forEach(element => {
+                const text = currentLang === 'zh' ? element.getAttribute('data-zh') : element.getAttribute('data-en');
+                
+                // 如果是 innerHTML (包含HTML标签)
+                if (text.includes('<br>') || text.includes('✓')) {
+                    element.innerHTML = text;
+                } else {
+                    element.textContent = text;
+                }
+            });
+            
+            // 更新页面语言属性
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+            
+            // 保存语言偏好到 localStorage
+            localStorage.setItem('preferredLang', currentLang);
+        }
+
+        // 页面加载时检查用户的语言偏好
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang && savedLang !== currentLang) {
+                toggleLanguage();
+            }
+        });
+
         // 添加平滑滚动效果
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
