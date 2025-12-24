@@ -87,13 +87,12 @@
             border-bottom: 2px solid rgba(255, 215, 0, 0.3);
         }
 
+        
         .section-icon {
-            font-size: 3em;
-            margin-right: 20px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        font-size: 3em;
+        margin-right: 20px;
+        /* 移除渐变文字效果,让emoji正常显示 */
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
         }
 
         .section-header h2 {
