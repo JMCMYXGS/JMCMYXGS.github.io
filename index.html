@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -1288,4 +1288,1337 @@
         });
     </script>
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web3 全方位服务平台 - 专业加密货币解决方案</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body{
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1d3f 100%);
+      color:#fff;
+      line-height:1.6;
+    }
+
+    /* ===== 顶部官网栏 ===== */
+    .top-bar{
+      position:fixed;
+      top:0; left:0;
+      width:100%;
+      height:64px;
+      background: rgba(10, 14, 39, 0.95);
+      backdrop-filter: blur(10px);
+      z-index:1000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .top-bar-inner{
+      max-width:1400px;
+      height:100%;
+      margin:0 auto;
+      padding:0 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .top-bar-left{
+      display:flex;
+      align-items:center;
+      min-width: 0;
+    }
+
+    .top-logo{
+      height:36px;
+      width:auto;
+      margin-right:12px;
+    }
+
+    .top-title{
+      font-size:18px;
+      font-weight:700;
+      color:#ffd700;
+      letter-spacing:1px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 360px;
+    }
+
+    .top-social{
+      display:flex;
+      gap:10px;
+      margin-left:16px;
+      flex-shrink:0;
+    }
+
+    .top-social a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:28px;
+      height:28px;
+      text-decoration:none;
+      transition: transform .25s ease;
+    }
+    .top-social a:hover{ transform: translateY(-2px); }
+
+    /* ===== 右侧：语言 + 汉堡（永远显示汉堡） ===== */
+    .top-bar-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-shrink:0;
+    }
+
+    .lang-switcher{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background: rgba(255,215,0,0.10);
+      border:1px solid rgba(255,215,0,0.30);
+      border-radius:25px;
+      padding:8px 14px;
+      cursor:pointer;
+      transition: all .25s ease;
+      user-select:none;
+    }
+    .lang-switcher:hover{
+      background: rgba(255,215,0,0.18);
+      border-color:#ffd700;
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(255,215,0,0.22);
+    }
+    .lang-icon{ width:20px; height:20px; fill:#ffd700; }
+    .lang-text{ color:#ffd700; font-size:14px; font-weight:700; letter-spacing:.3px; }
+
+    .hamburger{
+      display:flex; /* 永远显示 */
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,215,0,0.08);
+      cursor:pointer;
+      align-items:center;
+      justify-content:center;
+      gap:5px;
+      flex-direction:column;
+      transition: all .25s ease;
+    }
+    .hamburger:hover{
+      border-color: rgba(255,215,0,.42);
+      background: rgba(255,215,0,0.12);
+      transform: translateY(-1px);
+    }
+    .hamburger span{
+      display:block;
+      width:18px;
+      height:2px;
+      background:#ffd700;
+      border-radius:2px;
+      transition: all .25s ease;
+    }
+
+    /* ===== 移动端抽屉菜单（桌面也用同一个） ===== */
+    .mobile-nav-backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(2px);
+      z-index: 999;
+      display:none;
+    }
+    .mobile-nav-backdrop.open{ display:block; }
+
+    .mobile-nav{
+      position:fixed;
+      top:64px;
+      right:0;
+      width:min(360px, 88vw);
+      height: calc(100vh - 64px);
+      background: rgba(10,14,39,0.98);
+      border-left: 1px solid rgba(255,255,255,0.10);
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: transform .28s ease;
+      padding:16px;
+      overflow:auto;
+    }
+    .mobile-nav.open{ transform: translateX(0); }
+
+    .mobile-nav .nav-title{
+      color:#ffd700;
+      font-weight:800;
+      letter-spacing:.5px;
+      margin-bottom:10px;
+      font-size:16px;
+    }
+
+    .mobile-nav a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color:#b0c4de;
+      text-decoration:none;
+      font-weight:700;
+      padding:12px 12px;
+      border-radius:14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      margin-bottom:10px;
+      transition: all .2s ease;
+    }
+    .mobile-nav a:hover{
+      color:#ffd700;
+      border-color: rgba(255,215,0,.35);
+      background: rgba(255,215,0,.08);
+      transform: translateY(-1px);
+    }
+    .mobile-nav a .arrow{
+      opacity:.7;
+      font-weight:900;
+    }
+
+    /* 给 section 滚动时留出顶部固定栏空间 */
+    .service-section,
+    .header,
+    #pricing,
+    #recruit {
+      scroll-margin-top: 84px;
+    }
+
+    /* ===== Header ===== */
+    .header{
+      margin-top:64px; /* 顶出固定栏 */
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      padding: 80px 20px;
+      text-align:center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      position:relative;
+      overflow:hidden;
+    }
+    .header::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0; bottom:0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size:cover;
+      opacity:0.3;
+    }
+    .header h1{
+      font-size: 3.5em;
+      margin-bottom: 20px;
+      color:#ffd700;
+      position:relative;
+      z-index:1;
+      text-shadow: 0 0 30px rgba(255,215,0,0.3);
+      filter: drop-shadow(0 0 10px rgba(255,215,0,0.4));
+    }
+    .header p{
+      font-size:1.3em;
+      opacity:.92;
+      position:relative;
+      z-index:1;
+    }
+
+    .stats-bar{
+      display:flex;
+      justify-content:space-around;
+      flex-wrap:wrap;
+      margin-top:40px;
+      gap:20px;
+      position:relative;
+      z-index:1;
+    }
+    .stat-item{ text-align:center; padding:20px; }
+    .stat-number{ font-size:2.5em; color:#ffd700; font-weight:900; }
+    .stat-label{ color:#b0c4de; margin-top:5px; font-weight:600; }
+
+    .container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:60px 20px;
+    }
+
+    .service-section{
+      margin-bottom:80px;
+      background: rgba(255,255,255,0.05);
+      border-radius:20px;
+      padding:50px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all .3s ease;
+    }
+    .service-section:hover{
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .section-header{
+      display:flex;
+      align-items:center;
+      margin-bottom:40px;
+      padding-bottom:20px;
+      border-bottom:2px solid rgba(255,215,0,0.3);
+      gap:16px;
+    }
+    .section-icon{
+      font-size:3em;
+      filter: drop-shadow(0 0 8px rgba(255,215,0,0.6));
+    }
+    .section-header h2{
+      font-size:2.2em;
+      color:#ffd700;
+    }
+
+    .service-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:25px;
+    }
+
+    .service-card{
+      background: linear-gradient(135deg, rgba(42,82,152,0.30) 0%, rgba(30,60,114,0.30) 100%);
+      padding:30px;
+      border-radius:15px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all .3s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .service-card::before{
+      content:'';
+      position:absolute;
+      top:0; left:-100%;
+      width:100%; height:100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left .5s;
+    }
+    .service-card:hover::before{ left:100%; }
+    .service-card:hover{
+      transform: translateY(-5px);
+      border-color:#ffd700;
+      box-shadow: 0 10px 30px rgba(255,215,0,0.20);
+    }
+    .service-card h3{
+      color:#ffd700;
+      margin-bottom:15px;
+      font-size:1.3em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .service-card h3::before{
+      content:'▸';
+      color:#4CAF50;
+      font-weight:900;
+    }
+    .service-card p{
+      color:#b0c4de;
+      font-size:.95em;
+      line-height:1.6;
+    }
+
+    .service-features{
+      margin-top:14px;
+      padding-left:18px;
+      color:#b0c4de;
+      line-height:1.8;
+      font-size:.95em;
+    }
+    .service-features li{ margin:6px 0; }
+
+    .highlight-card{
+      background: linear-gradient(135deg, rgba(255,215,0,0.15) 0%, rgba(255,165,0,0.15) 100%);
+      border: 2px solid #ffd700;
+    }
+
+    .combo-badge{
+      display:inline-block;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+      color:white;
+      padding:5px 15px;
+      border-radius:20px;
+      font-size:.85em;
+      margin-top:10px;
+      font-weight:900;
+    }
+
+    .platform-logos{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+    .platform-tag{
+      background: rgba(76,175,80,0.2);
+      color:#4CAF50;
+      padding:8px 14px;
+      border-radius:10px;
+      font-size:.9em;
+      border: 1px solid rgba(76,175,80,0.3);
+      font-weight:700;
+    }
+
+    .feature-highlight{
+      background: linear-gradient(135deg, rgba(76,175,80,0.20) 0%, rgba(33,150,243,0.20) 100%);
+      padding:14px;
+      border-radius:12px;
+      margin-top:15px;
+      border-left:4px solid #4CAF50;
+      color:#b0c4de;
+      font-weight:600;
+    }
+
+    .cta-section{
+      text-align:center;
+      padding:60px 20px;
+      background: linear-gradient(135deg, rgba(255,215,0,0.10) 0%, rgba(255,165,0,0.10) 100%);
+      border-radius:20px;
+      margin-top:60px;
+    }
+
+    .cta-button{
+      display:inline-block;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      color:#0a0e27;
+      padding:18px 50px;
+      border-radius:50px;
+      text-decoration:none;
+      font-size:1.2em;
+      font-weight:900;
+      transition: all .3s ease;
+      box-shadow: 0 10px 30px rgba(255,215,0,0.30);
+      margin:10px;
+    }
+    .cta-button:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255,215,0,0.50);
+    }
+
+    @media (max-width: 900px){
+      .top-title{ max-width: 180px; font-size:14px; }
+    }
+    @media (max-width: 768px){
+      .header h1{ font-size:2em; }
+      .service-section{ padding:30px 20px; }
+      .section-header h2{ font-size:1.5em; }
+      .service-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 顶部官网栏 -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <img src="assets/logo.jpg" alt="官网 Logo" class="top-logo" />
+        <span class="top-title" data-zh="加密科技传媒有限公司" data-en="Crypto Technology Media Ltd.">加密科技传媒有限公司</span>
+
+        <div class="top-social">
+          <a href="https://t.me/AJMSKA" target="_blank" aria-label="Telegram">
+            <svg viewBox="0 0 240 240" width="28" height="28" role="img" aria-hidden="true">
+              <path fill="#ffd700" d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm58.4 82.2-19.7 92.7c-1.5 6.6-5.4 8.2-10.9 5.1l-30.2-22.3-14.6 14.1c-1.6 1.6-2.9 2.9-6 2.9l2.2-31.4 57.1-51.6c2.5-2.2-.5-3.4-3.8-1.2l-70.5 44.4-30.4-9.5c-6.6-2.1-6.7-6.6 1.4-9.8l118.7-45.8c5.5-2 10.3 1.3 8.7 9z"/>
+            </svg>
+          </a>
+
+          <a href="https://x.com/chh352h?s=21" target="_blank" aria-label="X">
+            <svg viewBox="0 0 24 24" width="28" height="28" role="img" aria-hidden="true">
+              <path fill="#ffd700" d="M18.9 2H22l-6.8 7.8L23.2 22h-6.6l-5.2-6.7L5.6 22H2l7.4-8.5L1.1 2h6.7l4.7 6.1L18.9 2zm-1.2 18h1.7L7.3 3.9H5.5L17.7 20z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="top-bar-right">
+        <!-- 语言切换 -->
+        <div class="lang-switcher" onclick="toggleLanguage()">
+          <svg class="lang-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+          </svg>
+          <span class="lang-text" id="langText">EN</span>
+        </div>
+
+        <!-- 汉堡按钮：网页端/手机端都显示 -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 抽屉菜单遮罩 + 菜单（桌面也用这个） -->
+  <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <div class="nav-title" data-zh="导航" data-en="Navigation">导航</div>
+
+    <a href="#listing"><span data-zh="交易所上币与收录" data-en="Exchange Listing & Directories">交易所上币与收录</span><span class="arrow">›</span></a>
+    <a href="#dev"><span data-zh="技术开发服务" data-en="Technical Development">技术开发服务</span><span class="arrow">›</span></a>
+    <a href="#profile"><span data-zh="头像上传与信息收录" data-en="Profiles & Information Listing">头像上传与信息收录</span><span class="arrow">›</span></a>
+    <a href="#audit"><span data-zh="安全审计" data-en="Security Audit">安全审计</span><span class="arrow">›</span></a>
+    <a href="#mm"><span data-zh="市值管理" data-en="Market Making">市值管理</span><span class="arrow">›</span></a>
+    <a href="#marketing"><span data-zh="媒体营销" data-en="Media Marketing">媒体营销</span><span class="arrow">›</span></a>
+    <a href="#ops"><span data-zh="社区运营与内容创作" data-en="Community & Content">社区运营与内容创作</span><span class="arrow">›</span></a>
+    <a href="#pricing"><span data-zh="服务报价参考" data-en="Pricing">服务报价参考</span><span class="arrow">›</span></a>
+    <a href="#recruit"><span data-zh="团队招募" data-en="Team Hiring">团队招募</span><span class="arrow">›</span></a>
+
+    <a href="https://t.me/AJMSKA" target="_blank">
+      <span data-zh="联系 TG 客服" data-en="Contact via Telegram">联系 TG 客服</span><span class="arrow">↗</span>
+    </a>
+
+    <a href="/terms.html" id="termsLink" target="_blank">
+      <span data-zh="服务条款" data-en="Terms of Service">服务条款</span><span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- 顶部展示 -->
+  <div class="header">
+    <h1 data-zh="🚀 Web3 全方位服务平台" data-en="🚀 Web3 Comprehensive Service Platform">🚀 Web3 全方位服务平台</h1>
+    <p
+      data-zh="从新闻营销到技术开发 | 从上币服务到市值管理 | 一站式加密货币解决方案"
+      data-en="From Media Marketing to Tech Development | From Listing Services to Market Making | One-Stop Crypto Solutions"
+    >
+      从新闻营销到技术开发 | 从上币服务到市值管理 | 一站式加密货币解决方案
+    </p>
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-number">1000+</div>
+        <div class="stat-label" data-zh="成功项目" data-en="Successful Projects">成功项目</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label" data-zh="合作平台" data-en="Partner Platforms">合作平台</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label" data-zh="专业服务" data-en="Professional Service">专业服务</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- 1. 交易所上币服务 -->
+    <div class="service-section" id="listing">
+      <div class="section-header">
+        <div class="section-icon">💎</div>
+        <h2 data-zh="交易所上币与收录" data-en="Exchange Listing & Directory Services">交易所上币与收录</h2>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <h3 data-zh="CEX 交易所上币通道" data-en="CEX Exchange Listing">CEX 交易所上币通道</h3>
+          <p
+            data-zh="Binance、OKX、Coinbase、Kraken、Bybit、KuCoin、Gate.io、Bitstamp、Huobi、Bitfinex、Bitget 等多交易所上币渠道"
+            data-en="Multi-exchange listing channels: Binance, OKX, Coinbase, Kraken, Bybit, KuCoin, Gate.io, Bitstamp, Huobi, Bitfinex, Bitget."
+          >
+            Binance、OKX、Coinbase、Kraken、Bybit、KuCoin、Gate.io、Bitstamp、Huobi、Bitfinex、Bitget 等多交易所上币渠道
+          </p>
+          <div class="platform-logos">
+            <span class="platform-tag" data-zh="币安" data-en="Binance">币安</span>
+            <span class="platform-tag">OKX</span>
+            <span class="platform-tag">Coinbase</span>
+            <span class="platform-tag">Kraken</span>
+            <span class="platform-tag">Bybit</span>
+            <span class="platform-tag">KuCoin</span>
+            <span class="platform-tag">Gate.io</span>
+            <span class="platform-tag">Bitstamp</span>
+            <span class="platform-tag" data-zh="火币" data-en="Huobi">火币</span>
+            <span class="platform-tag">Bitfinex</span>
+            <span class="platform-tag">Bitget</span>
+          </div>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="🔥 币安 Alpha 上币" data-en="🔥 Binance Alpha Listing">🔥 币安 Alpha 上币</h3>
+          <p data-zh="币安 Alpha 板块上线" data-en="Binance Alpha section launch">币安 Alpha 板块上线</p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 快速对接 ✓ 流程清晰" data-en="✓ Fast onboarding ✓ Clear process">✓ 快速对接 ✓ 流程清晰</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="Gate Alpha 上币" data-en="Gate Alpha Listing">Gate Alpha 上币</h3>
+          <div class="feature-highlight">
+            <span data-zh="Gate.io Alpha 区上币通道，快速上线二线交易所" data-en="Gate.io Alpha listing channel for quick tier-2 launch">
+              Gate.io Alpha 区上币通道，快速上线二线交易所
+            </span>
+          </div>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="CoinMarketCap 收录" data-en="CoinMarketCap Listing">CoinMarketCap 收录</h3>
+          <p
+            data-zh="CMC 官方收录，全球主流加密数据平台，项目基础设施"
+            data-en="Official CMC listing, a major crypto data platform and essential infrastructure."
+          >
+            CMC 官方收录，全球主流加密数据平台，项目基础设施
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 提升可信度 ✓ 增加曝光" data-en="✓ Credibility ✓ Exposure">✓ 提升可信度 ✓ 增加曝光</span>
+          </div>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="CoinGecko 收录" data-en="CoinGecko Listing">CoinGecko 收录</h3>
+          <p data-zh="CG 平台收录，补充 CMC 覆盖" data-en="CG listing to complement CMC coverage">CG 平台收录，补充 CMC 覆盖</p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="非小号收录" data-en="Feixiaohao Listing">非小号收录</h3>
+          <p data-zh="中文市场数据平台，覆盖华语圈投资者" data-en="Chinese data platform for Chinese-speaking investors">
+            中文市场数据平台，覆盖华语圈投资者
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="AVE 收录" data-en="AVE Listing">AVE 收录</h3>
+          <p data-zh="中文市场的 Meme 行情平台" data-en="Meme market tracking platform in Chinese market">
+            中文市场的 Meme 行情平台
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="Dexscreener & DEXTools 收录" data-en="Dexscreener & DEXTools Listing">Dexscreener & DEXTools 收录</h3>
+          <p data-zh="海外市场主流行情追踪平台" data-en="Mainstream trackers in overseas markets">
+            海外市场主流行情追踪平台
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 技术开发类业务 -->
+    <div class="service-section" id="dev">
+      <div class="section-header">
+        <div class="section-icon">⚙️</div>
+        <h2 data-zh="技术开发服务" data-en="Technical Development">技术开发服务</h2>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <h3 data-zh="交易所开发" data-en="Exchange Platform Development">交易所开发</h3>
+          <p
+            data-zh="面向数字资产交易平台的系统级开发服务，支持现货、合约、行情、撮合与后台管理等核心模块"
+            data-en="System-level exchange development including spot, derivatives, market data, matching, and admin modules."
+          >
+            面向数字资产交易平台的系统级开发服务，支持现货、合约、行情、撮合与后台管理等核心模块
+          </p>
+
+          <ul class="service-features">
+            <li data-zh="交易所前端系统（Web / H5）" data-en="Exchange frontend (Web / H5)">交易所前端系统（Web / H5）</li>
+            <li data-zh="行情系统（K 线、深度图、实时成交）" data-en="Market data (candles, depth, trades)">行情系统（K 线、深度图、实时成交）</li>
+            <li data-zh="订单系统（限价 / 市价 / 条件单）" data-en="Orders (limit/market/conditional)">订单系统（限价 / 市价 / 条件单）</li>
+            <li data-zh="撮合引擎接口对接" data-en="Matching engine integration">撮合引擎接口对接</li>
+            <li data-zh="后台管理系统（用户 / 资产 / 风控）" data-en="Admin (users/assets/risk)">后台管理系统（用户 / 资产 / 风控）</li>
+          </ul>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3
+            data-zh="智能合约开发（仅限海外项目）"
+            data-en="Smart Contract Development (Overseas Only)"
+          >
+            智能合约开发（仅限海外项目）
+          </h3>
+          <p
+            data-zh="标准合约、机制合约，支持税收、销毁、分红等功能"
+            data-en="Standard & mechanism contracts supporting tax, burn, dividend, etc."
+          >
+            标准合约、机制合约，支持税收、销毁、分红等功能
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 合约开源 ✓ 文档交付" data-en="✓ Open-source ✓ Docs delivered">✓ 合约开源 ✓ 文档交付</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="DApp 开发" data-en="DApp Development">DApp 开发</h3>
+          <p
+            data-zh="去中心化应用全栈开发，覆盖 DeFi / NFT / GameFi / SocialFi，支持多链部署与钱包交互"
+            data-en="Full-stack DApp development across DeFi/NFT/GameFi/SocialFi with multi-chain deploy and wallet integrations."
+          >
+            去中心化应用全栈开发，覆盖 DeFi / NFT / GameFi / SocialFi，支持多链部署与钱包交互
+          </p>
+
+          <ul class="service-features">
+            <li data-zh="合约 + 前端 + 后端一体化" data-en="End-to-end: contract + frontend + backend">合约 + 前端 + 后端一体化</li>
+            <li data-zh="支持 Ethereum / BNB / Solana / Base 等" data-en="Support Ethereum/BNB/Solana/Base">支持 Ethereum / BNB / Solana / Base 等</li>
+            <li data-zh="钱包接入（MetaMask / OKX / Phantom）" data-en="Wallets (MetaMask/OKX/Phantom)">钱包接入（MetaMask / OKX / Phantom）</li>
+            <li data-zh="链上数据读取与交易交互" data-en="On-chain reads & tx interaction">链上数据读取与交易交互</li>
+            <li data-zh="主网部署与维护" data-en="Mainnet deployment & maintenance">主网部署与维护</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="Web3 官网开发" data-en="Web3 Website Development">Web3 官网开发</h3>
+          <p
+            data-zh="面向区块链项目的专业官网解决方案，支持钱包交互、多链切换与链上数据展示"
+            data-en="Professional websites with wallet interactions, multi-chain switching, and on-chain displays."
+          >
+            面向区块链项目的专业官网解决方案，支持钱包交互、多链切换与链上数据展示
+          </p>
+
+          <ul class="service-features">
+            <li data-zh="响应式与性能优化" data-en="Responsive & performance optimized">响应式与性能优化</li>
+            <li data-zh="多链状态识别与切换" data-en="Multi-chain detection & switching">多链状态识别与切换</li>
+            <li data-zh="Token / NFT 链上数据展示" data-en="Token/NFT on-chain data display">Token / NFT 链上数据展示</li>
+          </ul>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="Launchpad 平台开发" data-en="Launchpad Platform Development">Launchpad 平台开发</h3>
+          <p
+            data-zh="支持白名单、认购、锁仓与分发等完整流程"
+            data-en="Complete workflow: whitelist, subscription, vesting, distribution."
+          >
+            支持白名单、认购、锁仓与分发等完整流程
+          </p>
+
+          <ul class="service-features">
+            <li data-zh="IDO / IEO / IGO 发售系统" data-en="IDO/IEO/IGO systems">IDO / IEO / IGO 发售系统</li>
+            <li data-zh="白名单与权限控制" data-en="Whitelist & access control">白名单与权限控制</li>
+            <li data-zh="锁仓释放机制" data-en="Vesting mechanisms">锁仓释放机制</li>
+            <li data-zh="后台数据管理" data-en="Admin dashboard">后台数据管理</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="锁仓与质押系统" data-en="Locking & Staking System">锁仓与质押系统</h3>
+          <p
+            data-zh="构建稳定激励体系，涵盖锁仓、质押、收益分配"
+            data-en="Build incentive systems covering locking, staking, reward distribution."
+          >
+            构建稳定激励体系，涵盖锁仓、质押、收益分配
+          </p>
+
+          <ul class="service-features">
+            <li data-zh="规则设计与参数配置" data-en="Rule design & parameters">规则设计与参数配置</li>
+            <li data-zh="前端展示与交互" data-en="Frontend UI & interaction">前端展示与交互</li>
+            <li data-zh="数据可视化与维护" data-en="Visualization & maintenance">数据可视化与维护</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 钱包头像 / 认证服务 -->
+    <div class="service-section" id="profile">
+      <div class="section-header">
+        <div class="section-icon">🎨</div>
+        <h2 data-zh="头像上传与信息收录" data-en="Profile Image Upload & Information Listing">头像上传与信息收录</h2>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <h3 data-zh="Dexscreener 头像更新" data-en="Dexscreener Logo Update">Dexscreener 头像更新</h3>
+          <p data-zh="快速更新头像，让项目在数据平台中更具辨识度" data-en="Fast logo update to improve visibility on data platforms.">
+            快速更新头像，让项目在数据平台中更具辨识度
+          </p>
+          <ul class="service-features">
+            <li data-zh="项目头像更新" data-en="Project logo update">项目头像更新</li>
+            <li data-zh="操作规范、上线快" data-en="Standard process, fast">操作规范、上线快</li>
+            <li data-zh="提升观感与信任" data-en="Better look & trust">提升观感与信任</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="OKX 钱包头像" data-en="OKX Wallet Logo">OKX 钱包头像</h3>
+          <p data-zh="官方头像上传，提升代币辨识度" data-en="Official logo upload to enhance recognition.">
+            官方头像上传，提升代币辨识度
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="TokenPocket 钱包头像" data-en="TokenPocket Wallet Logo">TokenPocket 钱包头像</h3>
+          <p data-zh="覆盖移动端用户的头像收录" data-en="Logo listing covering mobile users.">
+            覆盖移动端用户的头像收录
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="Bitget / Bybit 钱包头像" data-en="Bitget / Bybit Wallet Logo">Bitget / Bybit 钱包头像</h3>
+          <p data-zh="多平台覆盖，提升辨识度" data-en="Multi-platform coverage for better recognition.">
+            多平台覆盖，提升辨识度
+          </p>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="链上 CA 认证" data-en="On-chain CA Verification">链上 CA 认证</h3>
+          <p data-zh="合约地址官方认证 + Logo 上传 + 信息收录" data-en="Official verification + logo upload + information listing.">
+            合约地址官方认证 + Logo 上传 + 信息收录
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 官方认证标识 ✓ 防伪保护 ✓ 提升信任度" data-en="✓ Official Badge ✓ Anti-fraud ✓ Trust Boost">
+              ✓ 官方认证标识 ✓ 防伪保护 ✓ 提升信任度
+            </span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="DEXTools Logo 上传" data-en="DEXTools Logo Upload">DEXTools Logo 上传</h3>
+          <p data-zh="Logo 更新与项目资料添加" data-en="Logo update and project info submission.">
+            Logo 更新与项目资料添加
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 安全审计 & 风险检测 -->
+    <div class="service-section" id="audit">
+      <div class="section-header">
+        <div class="section-icon">🛡️</div>
+        <h2 data-zh="安全审计" data-en="Security Audit">安全审计</h2>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card highlight-card">
+          <h3 data-zh="智能合约安全审计" data-en="Smart Contract Security Audit">智能合约安全审计</h3>
+          <p data-zh="专业审计报告，覆盖常见漏洞检测与修复建议" data-en="Professional audit report covering common vulnerabilities and fixes.">
+            专业审计报告，覆盖常见漏洞检测与修复建议
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 专业审计 ✓ 详细报告 ✓ 风险提示" data-en="✓ Audit ✓ Detailed report ✓ Risk notes">
+              ✓ 专业审计 ✓ 详细报告 ✓ 风险提示
+            </span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="蜜罐检测服务" data-en="Honeypot Detection">蜜罐检测服务</h3>
+          <p data-zh="识别高风险合约逻辑，降低用户交互风险" data-en="Detect risky logic to reduce interaction risk.">
+            识别高风险合约逻辑，降低用户交互风险
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="审计服务报告" data-en="Audit Service Report">审计服务报告</h3>
+          <p data-zh="全方面扫描代币合约，提供修复建议与说明" data-en="Comprehensive scanning with recommendations and notes.">
+            全方面扫描代币合约，提供修复建议与说明
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 市值管理机器人 -->
+    <div class="service-section" id="mm">
+      <div class="section-header">
+        <div class="section-icon">🤖</div>
+        <h2 data-zh="市值管理" data-en="Market Making">市值管理</h2>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <h3 data-zh="市值管理机器人" data-en="Market Making Bot">市值管理机器人</h3>
+          <p data-zh="提供流动性维护与策略执行支持" data-en="Support liquidity maintenance and strategy execution.">
+            提供流动性维护与策略执行支持
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 24/7 运行 ✓ 策略可控 ✓ 数据监控" data-en="✓ 24/7 ✓ Controlled strategies ✓ Monitoring">
+              ✓ 24/7 运行 ✓ 策略可控 ✓ 数据监控
+            </span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="自动做市商（AMM）" data-en="Automated Market Maker (AMM)">自动做市商（AMM）</h3>
+          <p data-zh="定制化策略支持，多链部署，优化深度表现" data-en="Customized strategies, multi-chain deploy, depth optimization.">
+            定制化策略支持，多链部署，优化深度表现
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 低滑点 ✓ 高效率 ✓ 数据驱动" data-en="✓ Low slippage ✓ Efficient ✓ Data-driven">
+              ✓ 低滑点 ✓ 高效率 ✓ 数据驱动
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. 币安新闻投放 -->
+    <div class="service-section" id="marketing">
+      <div class="section-header">
+        <div class="section-icon">📰</div>
+        <h2 data-zh="新闻投放与媒体营销" data-en="News Distribution & Media Marketing">新闻投放与媒体营销</h2>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card highlight-card">
+          <h3 data-zh="官方日报/媒体合作" data-en="Official Daily / Media Partners">官方日报/媒体合作</h3>
+          <p data-zh="覆盖多渠道曝光，提升可信度与传播效率" data-en="Multi-channel exposure to improve credibility and reach.">
+            覆盖多渠道曝光，提升可信度与传播效率
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 快速审核 ✓ 覆盖广 ✓ 传播稳定" data-en="✓ Fast review ✓ Wide reach ✓ Stable">
+              ✓ 快速审核 ✓ 覆盖广 ✓ 传播稳定
+            </span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="媒体快讯发布" data-en="Breaking News Release">媒体快讯发布</h3>
+          <p data-zh="行业媒体快讯投放，精准触达目标受众" data-en="Targeted breaking news distribution for precise reach.">
+            行业媒体快讯投放，精准触达目标受众
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="各大媒体 PR 推送" data-en="Multi-Media PR Distribution">各大媒体 PR 推送</h3>
+          <p data-zh="新闻稿多平台分发，提升曝光效率" data-en="Multi-platform press release distribution.">
+            新闻稿多平台分发，提升曝光效率
+          </p>
+          <div class="platform-logos">
+            <span class="platform-tag">PANews</span>
+            <span class="platform-tag">BlockBeats</span>
+            <span class="platform-tag" data-zh="深潮" data-en="Foresight">深潮</span>
+            <span class="platform-tag" data-zh="链闻" data-en="ChainNews">链闻</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="TG / X 广告投放" data-en="TG / X Advertising">TG / X 广告投放</h3>
+          <p data-zh="定向投放，覆盖目标用户群体" data-en="Targeted ads to reach desired audience segments.">
+            定向投放，覆盖目标用户群体
+          </p>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="DEX 热搜趋势" data-en="DEX Trending">DEX 热搜趋势</h3>
+          <p data-zh="提高项目曝光，吸引交易者关注" data-en="Boost visibility and attract traders.">
+            提高项目曝光，吸引交易者关注
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 实时数据 ✓ 高关注度 ✓ 可追踪" data-en="✓ Real-time ✓ High attention ✓ Trackable">
+              ✓ 实时数据 ✓ 高关注度 ✓ 可追踪
+            </span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="DexScreener 收录/头像/热度" data-en="DexScreener Listing/Logo/Trending">DexScreener 收录/头像/热度</h3>
+          <p data-zh="提升项目辨识度与搜索权重" data-en="Improve recognition and search weight.">
+            提升项目辨识度与搜索权重
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="AVE 全套服务" data-en="AVE Full Package">AVE 全套服务</h3>
+          <p data-zh="热搜、广告、头像收录一站式" data-en="Trending, ads, logo listing in one package.">
+            热搜、广告、头像收录一站式
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. 运营类业务 -->
+    <div class="service-section" id="ops">
+      <div class="section-header">
+        <div class="section-icon">📢</div>
+        <h2 data-zh="社区运营与内容创作" data-en="Community Operations & Content Creation">社区运营与内容创作</h2>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <h3 data-zh="X 运营" data-en="X (Twitter) Management">X 运营</h3>
+          <p data-zh="内容策划、热点跟踪、KOL 联动与长期代运营" data-en="Content planning, trend tracking, KOL collabs and long-term management.">
+            内容策划、热点跟踪、KOL 联动与长期代运营
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="Telegram 社群运营" data-en="Telegram Community Management">Telegram 社群运营</h3>
+          <p data-zh="群组管理、机器人设定、社区活动策划" data-en="Group management, bots, and community events.">
+            群组管理、机器人设定、社区活动策划
+          </p>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="视频制作" data-en="Video Production">视频制作</h3>
+          <p data-zh="AMA 剪辑、宣传片、教程视频、动画 Explainer" data-en="AMA edits, promos, tutorials, animated explainers.">
+            AMA 剪辑、宣传片、教程视频、动画 Explainer
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 多语言字幕 ✓ 跨平台分发" data-en="✓ Multi-language subtitles ✓ Cross-platform distribution">
+              ✓ 多语言字幕 ✓ 跨平台分发
+            </span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="白皮书设计" data-en="Whitepaper Design">白皮书设计</h3>
+          <p data-zh="撰写与排版，符合行业规范与审美" data-en="Writing and layout aligned with industry standards.">
+            撰写与排版，符合行业规范与审美
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="PPT & 官网文案" data-en="PPT & Website Copywriting">PPT & 官网文案</h3>
+          <p data-zh="路演 PPT、官网文案策划，中英文文案服务" data-en="Pitch deck, website copy, bilingual copywriting.">
+            路演 PPT、官网文案策划，中英文文案服务
+          </p>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="项目整体包装（0到1）" data-en="Project Full Package (0 to 1)">项目整体包装（0到1）</h3>
+          <p data-zh="从概念到上线全流程服务：品牌、技术、运营" data-en="From concept to launch: branding, tech and operations.">
+            从概念到上线全流程服务：品牌、技术、运营
+          </p>
+          <span class="combo-badge" data-zh="全套方案" data-en="Complete Solution">全套方案</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 价格展示区域 -->
+    <div class="service-section" id="pricing">
+      <div class="section-header">
+        <div class="section-icon">💰</div>
+        <h2 data-zh="服务报价参考" data-en="Service Pricing Reference">服务报价参考</h2>
+      </div>
+
+      <div style="text-align:center; margin-bottom:30px; color:#b0c4de;">
+        <p data-zh="以下为参考价格，具体报价根据项目需求定制" data-en="Reference prices below; final quotes depend on project requirements.">
+          以下为参考价格，具体报价根据项目需求定制
+        </p>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <h3 data-zh="🥉 基础套餐" data-en="🥉 Basic Package">🥉 基础套餐</h3>
+          <div style="font-size:2em; color:#ffd700; margin:20px 0;">$8,888+</div>
+          <p style="margin-bottom:15px;" data-zh="适合初创项目" data-en="Suitable for startups">适合初创项目</p>
+          <div style="text-align:left; color:#b0c4de; line-height:2;">
+            <span data-zh="✓ CMC/CG 收录" data-en="✓ CMC/CG Listing">✓ CMC/CG 收录</span><br>
+            <span data-zh="✓ 1-2个钱包头像" data-en="✓ 1-2 Wallet Logos">✓ 1-2个钱包头像</span><br>
+            <span data-zh="✓ 基础合约开发" data-en="✓ Basic Contract Development">✓ 基础合约开发</span><br>
+            <span data-zh="✓ 简单官网设计" data-en="✓ Simple Website Design">✓ 简单官网设计</span>
+          </div>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="🥈 进阶套餐" data-en="🥈 Advanced Package">🥈 进阶套餐</h3>
+          <div style="font-size:2em; color:#ffd700; margin:20px 0;">$15,888+</div>
+          <p style="margin-bottom:15px;" data-zh="热门选择 - 性价比最高" data-en="Popular Choice - Best Value">热门选择 - 性价比最高</p>
+          <div style="text-align:left; color:#b0c4de; line-height:2;">
+            <span data-zh="✓ 新闻/媒体投放" data-en="✓ News/Media">✓ 新闻/媒体投放</span><br>
+            <span data-zh="✓ 全平台收录" data-en="✓ All-platform Listing">✓ 全平台收录</span><br>
+            <span data-zh="✓ DEX 热度支持" data-en="✓ DEX Visibility Support">✓ DEX 热度支持</span><br>
+            <span data-zh="✓ 钱包头像覆盖" data-en="✓ Wallet Logo Coverage">✓ 钱包头像覆盖</span><br>
+            <span data-zh="✓ 合约审计报告" data-en="✓ Contract Audit Report">✓ 合约审计报告</span><br>
+            <span data-zh="✓ 社群运营" data-en="✓ Community Ops">✓ 社群运营</span>
+          </div>
+          <span class="combo-badge" data-zh="最受欢迎" data-en="Most Popular">最受欢迎</span>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="🥇 旗舰套餐" data-en="🥇 Premium Package">🥇 旗舰套餐</h3>
+          <div style="font-size:2em; color:#ffd700; margin:20px 0;">$35,888+</div>
+          <p style="margin-bottom:15px;" data-zh="全方位解决方案" data-en="Comprehensive Solution">全方位解决方案</p>
+          <div style="text-align:left; color:#b0c4de; line-height:2;">
+            <span data-zh="✓ 0到1全流程服务" data-en="✓ 0 to 1 Full Service">✓ 0到1全流程服务</span><br>
+            <span data-zh="✓ 全媒体矩阵" data-en="✓ Full Media Matrix">✓ 全媒体矩阵</span><br>
+            <span data-zh="✓ Launchpad/系统开发" data-en="✓ Launchpad/System Development">✓ Launchpad/系统开发</span><br>
+            <span data-zh="✓ 运营托管" data-en="✓ Managed Operations">✓ 运营托管</span><br>
+            <span data-zh="✓ 专属项目经理" data-en="✓ Dedicated PM">✓ 专属项目经理</span>
+          </div>
+        </div>
+
+        <div class="service-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%); border: 2px dashed #ffd700;">
+          <h3 style="text-align:center; font-size:1.5em;" data-zh="🎯 定制化项目方案" data-en="🎯 Custom Project Solutions">🎯 定制化项目方案</h3>
+          <p style="text-align:center; margin-top:15px; font-size:1.1em;"
+             data-zh="针对大型项目、DAO组织、交易所等机构客户，我们提供完全定制化解决方案。"
+             data-en="For large projects, DAOs, exchanges and institutions, we provide fully customized solutions.">
+            针对大型项目、DAO组织、交易所等机构客户，我们提供完全定制化解决方案。
+          </p>
+          <div style="text-align:center; margin-top:20px;">
+            <a href="https://t.me/AAJJSSA" target="_blank" style="color:#ffd700; text-decoration:none; font-size:1.2em; font-weight:900;">
+              <span data-zh="💬 欢迎加入我们的 TG 交流群 →" data-en="💬 Join our Telegram community →">💬 欢迎加入我们的 TG 交流群 →</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:40px; padding:20px; background: rgba(255,215,0,0.05); border-radius:10px; border-left:4px solid #ffd700;">
+        <p style="color:#ffd700; font-weight:900; margin-bottom:10px;" data-zh="💡 价格说明:" data-en="💡 Pricing Notes:">💡 价格说明:</p>
+        <p style="color:#b0c4de; line-height:1.8;"
+           data-zh="• 以上为参考起步价，最终报价根据需求、周期、紧急程度调整<br>• 长期合作客户享受优惠<br>• 支持 USDT/USDC/ETH/BNB 等支付"
+           data-en="• Reference starting prices; final quotes depend on scope/timeline/urgency<br>• Discounts for long-term partners<br>• Accepts USDT/USDC/ETH/BNB payments">
+          • 以上为参考起步价，最终报价根据需求、周期、紧急程度调整<br>
+          • 长期合作客户享受优惠<br>
+          • 支持 USDT/USDC/ETH/BNB 等支付
+        </p>
+      </div>
+    </div>
+
+    <!-- 8. 团队招募 -->
+    <div class="service-section" id="recruit">
+      <div class="section-header">
+        <div class="section-icon">🧑‍🤝‍🧑</div>
+        <h2 data-zh="团队招募" data-en="Team Hiring">团队招募</h2>
+      </div>
+
+      <div style="color:#b0c4de; margin-bottom:18px;"
+           data-zh="我们长期招募 Web3 方向伙伴，支持远程/兼职/全职，按项目或长期合作均可。"
+           data-en="We’re hiring Web3 talents. Remote / part-time / full-time available. Project-based or long-term collaboration.">
+        我们长期招募 Web3 方向伙伴，支持远程/兼职/全职，按项目或长期合作均可。
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <h3 data-zh="BD / 渠道合作" data-en="BD / Partnerships">BD / 渠道合作</h3>
+          <p data-zh="项目对接、需求梳理、资源合作拓展" data-en="Onboarding, requirement analysis, partnership development.">
+            项目对接、需求梳理、资源合作拓展
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="前端工程师" data-en="Frontend Engineer">前端工程师</h3>
+          <p data-zh="Web3 官网 / DApp 前端开发（React/Vue）" data-en="Web3 website/DApp frontend (React/Vue).">
+            Web3 官网 / DApp 前端开发（React/Vue）
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="后端工程师" data-en="Backend Engineer">后端工程师</h3>
+          <p data-zh="接口与后台系统开发，性能优化与风控加分" data-en="API/admin systems; performance & risk control are a plus.">
+            接口与后台系统开发，性能优化与风控加分
+          </p>
+        </div>
+
+        <div class="service-card highlight-card">
+          <h3 data-zh="Solidity / 安全研究" data-en="Solidity / Security Research">Solidity / 安全研究</h3>
+          <p data-zh="合约开发与审计支持，熟悉常见漏洞与最佳实践" data-en="Contract dev & audit support; common vulns & best practices.">
+            合约开发与审计支持，熟悉常见漏洞与最佳实践
+          </p>
+          <div class="feature-highlight">
+            <span data-zh="✓ 可按单合作 ✓ 长期优先" data-en="✓ Project-based ✓ Long-term preferred">✓ 可按单合作 ✓ 长期优先</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="设计 / 视频剪辑" data-en="Design / Video Editing">设计 / 视频剪辑</h3>
+          <p data-zh="品牌视觉、海报、短视频/AMA 剪辑与适配" data-en="Brand visuals, posters, short videos/AMA edits.">
+            品牌视觉、海报、短视频/AMA 剪辑与适配
+          </p>
+        </div>
+
+        <div class="service-card">
+          <h3 data-zh="社区运营" data-en="Community Operations">社区运营</h3>
+          <p data-zh="TG 社群维护、活动策划、机器人配置、内容运营" data-en="Telegram ops, events, bots, daily content.">
+            TG 社群维护、活动策划、机器人配置、内容运营
+          </p>
+        </div>
+
+        <div class="service-card" style="grid-column: 1 / -1;">
+          <h3 data-zh="加入方式" data-en="How to Apply">加入方式</h3>
+          <p
+            data-zh="请通过 TG 联系我们，发送：岗位 + 作品/履历 + 可投入时间（全职/兼职/远程）。"
+            data-en="Contact us via Telegram with: role + portfolio/CV + availability (full-time/part-time/remote)."
+          >
+            请通过 TG 联系我们，发送：岗位 + 作品/履历 + 可投入时间（全职/兼职/远程）。
+          </p>
+          <div class="feature-highlight">
+            <a href="https://t.me/AJMSKA" target="_blank" style="color:#ffd700; text-decoration:none; font-weight:900;"
+               data-zh="💬 立即联系 TG 客服 →" data-en="💬 Contact via Telegram →">
+              💬 立即联系 TG 客服 →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <h2 style="font-size:2.5em; margin-bottom:20px; color:#ffd700;"
+          data-zh="🚀 开启您的 Web3 之旅" data-en="🚀 Start Your Web3 Journey">
+        🚀 开启您的 Web3 之旅
+      </h2>
+
+      <p style="font-size:1.2em; margin-bottom:40px; color:#b0c4de;"
+         data-zh="专业团队 | 一站式服务 | 7×24小时响应"
+         data-en="Professional Team | One-Stop Service | 24/7 Response">
+        专业团队 | 一站式服务 | 7×24小时响应
+      </p>
+
+      <a href="https://t.me/AJMSKA" target="_blank" class="cta-button">
+        <span data-zh="立即咨询客服" data-en="Contact Support Now">立即咨询客服</span>
+      </a>
+
+      <a href="#pricing" class="cta-button" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
+        <span data-zh="查看报价" data-en="View Pricing">查看报价</span>
+      </a>
+
+      <div style="margin-top:40px; color:#b0c4de;">
+        <p style="margin-top:10px; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap;">
+          <!-- Email: click to copy -->
+          <a href="javascript:void(0)" onclick="copyEmail(event)"
+             style="display:inline-flex; align-items:center; gap:6px; color:#b0c4de; text-decoration:none; font-weight:700; cursor:pointer;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4285F4" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <span id="emailText" data-zh="邮箱：bowshi88@gmail.com" data-en="Email: bowshi88@gmail.com">邮箱：bowshi88@gmail.com</span>
+            <span id="copyTip" style="display:none; font-size:.9em; color:#7CFC98; margin-left:6px;">已复制</span>
+          </a>
+
+          <span style="color:#b0c4de;">|</span>
+
+          <!-- CEO 账户 -->
+          <a href="https://x.com/chh352h?s=21" target="_blank"
+             style="display:inline-flex; align-items:center; gap:6px; color:#b0c4de; text-decoration:none; font-weight:700;">
+            <span data-zh="CEO 账户:" data-en="CEO Account:">CEO 账户:</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DA1F2" aria-hidden="true">
+              <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.6l-5.2-6.7L5.6 22H2l7.4-8.5L1.1 2h6.7l4.7 6.1L18.9 2zm-1.2 18h1.7L7.3 3.9H5.5L17.7 20z"/>
+            </svg>
+          </a>
+        </p>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+
+  <script>
+    // ===== 语言切换 =====
+    let currentLang = 'zh';
+
+    function toggleLanguage() {
+      currentLang = (currentLang === 'zh') ? 'en' : 'zh';
+
+      // 更新按钮文字
+      const langText = document.getElementById('langText');
+      if (langText) langText.textContent = (currentLang === 'zh') ? 'EN' : '中文';
+
+      // 更新所有 data-zh/data-en 文本
+      document.querySelectorAll('[data-zh][data-en]').forEach(el => {
+        const text = (currentLang === 'zh') ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+        if (!text) return;
+
+        // 允许 <br> 与 ✓ 保持 html
+        if (text.includes('<br>') || text.includes('✓')) el.innerHTML = text;
+        else el.textContent = text;
+      });
+
+      // 更新 lang
+      document.documentElement.lang = (currentLang === 'zh') ? 'zh-CN' : 'en';
+
+      // terms 链接带语言参数
+      const termsLink = document.getElementById('termsLink');
+      if (termsLink) termsLink.href = `/terms.html?lang=${currentLang}`;
+
+      // 保存偏好
+      localStorage.setItem('preferredLang', currentLang);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('preferredLang');
+      if (savedLang && savedLang !== currentLang) toggleLanguage();
+    });
+
+    // ===== 平滑滚动（点击 #xxx） =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e){
+        e.preventDefault();
+        const id = this.getAttribute('href');
+        const target = document.querySelector(id);
+        if (target) {
+          target.scrollIntoView({ behavior:'smooth', block:'start' });
+        }
+      });
+    });
+
+    // ===== 滚动进入动画 =====
+    const observerOptions = { threshold: 0.10, rootMargin: '0px 0px -100px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '0';
+          entry.target.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            entry.target.style.transition = 'all 0.6s ease';
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, 80);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.service-section').forEach(section => observer.observe(section));
+
+    // ===== 邮箱复制 =====
+    function copyEmail(e){
+      e.preventDefault();
+      const email = "bowshi88@gmail.com";
+      const tip = document.getElementById("copyTip");
+
+      function showCopied(){
+        if (!tip) return;
+        tip.style.display = "inline";
+        clearTimeout(window.__copyTipTimer);
+        window.__copyTipTimer = setTimeout(() => tip.style.display = "none", 1500);
+      }
+
+      function fallbackCopy(text){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        ta.style.top = "-9999px";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try { document.execCommand("copy"); showCopied(); } catch(err){ console.error(err); }
+        document.body.removeChild(ta);
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(showCopied).catch(() => fallbackCopy(email));
+      } else {
+        fallbackCopy(email);
+      }
+    }
+
+    // ===== 汉堡菜单（桌面/手机统一使用） =====
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileNavBackdrop = document.getElementById('mobileNavBackdrop');
+
+    function openNav(){
+      mobileNav.classList.add('open');
+      mobileNavBackdrop.classList.add('open');
+      hamburgerBtn.setAttribute('aria-expanded','true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNav(){
+      mobileNav.classList.remove('open');
+      mobileNavBackdrop.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
+    }
+
+    hamburgerBtn.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.contains('open');
+      isOpen ? closeNav() : openNav();
+    });
+
+    mobileNavBackdrop.addEventListener('click', closeNav);
+
+    // 点击菜单项后关闭
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeNav()));
+
+    // ESC 关闭
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeNav();
+    });
+  </script>
+</body>
 </html>
+
