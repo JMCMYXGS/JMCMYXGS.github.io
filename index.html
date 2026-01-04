@@ -1429,6 +1429,19 @@
       border-radius:2px;
       transition: all .25s ease;
     }
+    .hamburger.active{
+      border-color: rgba(255,215,0,.6);
+      background: rgba(255,215,0,0.15);
+    }
+    .hamburger.active span:nth-child(1){
+      transform: translateY(6px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2){
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3){
+      transform: translateY(-6px) rotate(-45deg);
+    }
 
     /* ===== 移动端抽屉菜单（桌面也用同一个） ===== */
     .mobile-nav-backdrop{
@@ -2594,12 +2607,14 @@
     function openNav(){
       mobileNav.classList.add('open');
       mobileNavBackdrop.classList.add('open');
+      hamburgerBtn.classList.add('active');
       hamburgerBtn.setAttribute('aria-expanded','true');
       document.body.style.overflow = 'hidden';
     }
     function closeNav(){
       mobileNav.classList.remove('open');
       mobileNavBackdrop.classList.remove('open');
+      hamburgerBtn.classList.remove('active');
       hamburgerBtn.setAttribute('aria-expanded','false');
       document.body.style.overflow = '';
     }
